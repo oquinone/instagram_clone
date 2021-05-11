@@ -14,19 +14,16 @@ import Nat_3 from '../images/nature_3.jpeg';
 import Nat_4 from '../images/nature_4.jpeg';
 import Nat_5 from '../images/nature_5.jpeg';
 
-import { ReactComponent as Gear } from '../svg/gear.svg';
-
 const pics = [Sky, Nat_1, Nat_2, Nat_3, Nat_4, Nat_5];
 
 
 export const Profile = () => {
     return (
         <div className = "profile">
-            <section className="flex-sb profile-p-all profile-header">
+            <section className="flex-c profile-p-all profile-header">
                 <div>
                     <h1>UserName</h1>
                 </div>
-                <div><Button variant="link"> <Gear/></Button></div>
             </section>
 
             <section className="flex-sb profile-p-all profile-user">
