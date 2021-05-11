@@ -1,0 +1,26 @@
+.navigation{
+    flex-flow: row nowrap;
+    align-items: center;
+
+    .btn{
+        // color: white;
+        // background-color: whitesmoke;
+        border: none;
+        outline: none;
+
+        &:active{
+            border: none;
+        }
+    }
+    .svg{
+        fill: white;
+    }
+
+    &-input{
+        display: none;
+    }
+}
+
+.alertBox{
+    z-index: 4;
+}

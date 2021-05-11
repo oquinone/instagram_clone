@@ -1,0 +1,91 @@
+$background: #242526;
+$text-color: white;
+
+.profile{
+    background-color: $background;
+    height: 100vh;
+
+    &-header{
+        background-color:$background;
+        align-items: center;
+        color: $text-color;
+
+        .btn-link{
+            border: none;
+            cursor: pointer;
+            background-color: transparent;
+            outline: none;
+            color: white;
+        }
+
+        .btn-link:hover{
+            color: red;
+        }
+    }
+
+    &-user{
+        align-items: center;
+        background-color: $background;
+        color: $text-color;
+    }
+
+    &-stats{
+        padding: 1.5rem 0px;
+        ul{
+            flex-flow: row nowrap;
+            list-style-type: none;
+            margin: 0 auto;
+    
+    
+            li{
+                font-size: 13px;
+                padding: 0px 10px;
+                text-align: center;
+            }
+        }
+    }
+
+    &-pic{
+        width: 75px;
+        height: 75px;
+        border-radius: 50%;
+    }
+
+    &-edit{
+        padding: 10px 5px;
+        background-color: $background;
+    
+        .btn-secondary{
+            outline: none;
+        }
+        .btn-secondary:hover{
+            color: none;
+        }
+        .btn-secondary:active{
+            color: none;
+        }
+    }
+
+    &-bio{
+        background-color: $background;
+        color: $text-color;
+    }
+
+    &-uploads{
+        div{
+            flex-flow: row wrap;
+            img{
+                //Need to fix width to adjust as needed
+                width: 33.3vw;
+                height: 30vw;
+                border: 1px solid $background;
+            }
+        }
+    }
+
+    &-nav{
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+    }
+}

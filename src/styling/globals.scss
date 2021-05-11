@@ -1,0 +1,107 @@
+*{
+    font-family: 'Public Sans', sans-serif;
+    padding: 0;
+    margin: 0;
+    font-weight: normal;
+}
+
+h1{
+    font-size: 19px;
+    font-weight: 400;
+    margin: 20px 0px;
+}
+
+// h2, h3, h4, h5{
+//     font-size: 22px;
+// }
+
+// p{
+//     line-height: 1.6;
+//     color: hsl(233, 8%, 62%);
+//     font-size: 16px;
+// }
+
+.p-all{
+    // padding: 18rem 7rem;
+
+    // @include breakpoint-down(medium){
+    //     padding: 18rem 4rem;
+    // }
+
+    // @include breakpoint-down(small){
+    //     padding: 18rem 2rem;
+    // }
+}
+
+.p-l{
+    // padding-left: 8rem;
+
+    // @include breakpoint-down(medium){
+    //     padding-left: 4rem;
+    //     // padding-right: 7rem;
+    // }
+
+    // @include breakpoint-down(small){
+    //     padding: 0rem;
+    // }
+}
+
+.p-lr{
+    padding-left: 2rem;
+    padding-right: 2rem;
+
+    // @include breakpoint-down(medium){
+    //     padding-left: 7rem;
+    //     padding-right: 7rem;
+    // }
+
+    // @include breakpoint-down(small){
+    //     padding-left: 2rem;
+    //     padding-right: 2rem;
+    // }
+}
+
+.profile-p-all{
+    padding: .5rem 2rem;
+}
+
+.p-tb{
+    padding: 0.5rem 1rem;
+}
+
+.p-p-tb{
+    padding-top: 0.9375rem;
+    padding-bottom: 0.9375rem;
+}
+
+.flex-c{
+    display: flex;
+    justify-content: center;
+}
+
+.flex-sa{
+    display: flex;
+    justify-content: space-around;
+}
+
+.flex-sb{
+    display: flex;
+    justify-content: space-between;
+}
+
+.flex-se{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.t-a-c{
+    text-align: center;
+}
+
+
+// .btn{
+//     border: none;
+//     cursor: pointer;
+//     background-color: transparent;
+//     outline: none;
+// }
