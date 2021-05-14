@@ -1,11 +1,14 @@
-import React from 'react';
-import { Button } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Button, Spinner } from 'react-bootstrap';
 import { Navigation } from './navigation';
 
 import { Link } from 'react-router-dom';
 
 import '../styling/profile.scss';
 import '../styling/globals.scss';
+
+// import { useSelector, useDispatch } from 'react-redux';
+// import { setBio, setUsername } from '../redux/imageUpload';
 
 import Sky from '../images/sky photo.jpg';
 import Nat_1 from '../images/nature_1.jpeg';
@@ -18,11 +21,36 @@ const pics = [Sky, Nat_1, Nat_2, Nat_3, Nat_4, Nat_5];
 
 
 export const Profile = () => {
+    const [isLoading, setIsLoading] = useState(true);
+    const [apiData, setApiData] = useState();
+
+    const getAPIData = () => {
+        // console.log("Useefect")
+        const uid = "609d7df80c94a510c2ff6921";
+        const url = `http://localhost:5000/profile/${uid}`;
+        const options = { method: 'GET' }
+        fetch(url, options)
+            .then(res => res.json())
+            .then(data => {
+                setApiData(data)
+                setIsLoading(false);
+            });
+    }
+
+    useEffect(() => {
+        getAPIData();
+    }, [])
+
+    if(isLoading){
+        return <div className="flex-c spinner">
+                <Spinner animation="border" variant="primary"/>
+            </div>
+    }
     return (
         <div className = "profile">
             <section className="flex-c profile-p-all profile-header">
                 <div>
-                    <h1>UserName</h1>
+                    <h1>{apiData["username"]}</h1>
                 </div>
             </section>
 
@@ -44,14 +72,13 @@ export const Profile = () => {
                     <Button 
                     variant="secondary" 
                     block size="sm"
+                    className="textStyle"
                     >Edit Profile</Button>
                 </Link>
             </section>
 
             <section className="p-tb profile-bio">
-                <p>"Lorem ipsum dolor sit amet, consectetur scing elit, 
-                    sed do eiusmod tempor incididunt ut labore et dolore magna 
-                    aliqua.</p>
+                <p>{apiData["profileBio"]}</p>
             </section>
 
             <section className="profile-uploads">
