@@ -9,17 +9,33 @@ h1{
     font-size: 19px;
     font-weight: 400;
     margin: 20px 0px;
+    font-family: 'Jura', sans-serif;
 }
 
-// h2, h3, h4, h5{
-//     font-size: 22px;
-// }
+.textStyle{
+    font-family: 'Jura', sans-serif;
+}
 
-// p{
-//     line-height: 1.6;
-//     color: hsl(233, 8%, 62%);
-//     font-size: 16px;
-// }
+h2, h3, h4, h5{
+    font-family: 'Jura', sans-serif;
+    font-size: 19px;
+    // font-weight: 700;
+}
+
+ul{
+    font-family: 'Jura', sans-serif;
+}
+
+li{
+    font-family: 'Jura', sans-serif;
+}
+
+p{
+    line-height: 1.1;
+    // color: hsl(233, 8%, 62%);
+    font-size: 14px;
+    font-family: 'Cutive Mono', monospace;
+}
 
 .p-all{
     // padding: 18rem 7rem;
