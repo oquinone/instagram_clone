@@ -16,21 +16,17 @@ const App = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if(uploaded) {
+        if(uploaded.payload) {
             setIsOpen(true);
             // console.log("Enetered");
         }
     }, [uploaded]);
-    // const onSubmit = (e) => {
-    //     e.preventDefault();
-    //     const formatData = new formatData();
-    //     formatData.append('file', image);
+    const onSubmit = (e) => {
+        e.preventDefault();
+        const formatData = new formatData();
+        formatData.append('file', image);
 
-    // }
-
-    // const submit = () => {
-        
-    // }
+    }
 
     const closeModal = () =>{
         dispatch(setImage(""))
