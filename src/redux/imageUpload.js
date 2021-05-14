@@ -6,7 +6,7 @@ export const imageSlice = createSlice({
     image: "",
     imageName: "",
     uploadedImage: {},
-    uploaded: false
+    uploaded: false,
   },
   reducers: {
     setImage: (state, image) => {
@@ -20,7 +20,7 @@ export const imageSlice = createSlice({
     },
     isUploaded: (state, check) => {
       state.uploaded = check;
-    }
+    },
   },
 });
 
