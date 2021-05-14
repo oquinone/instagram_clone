@@ -4,6 +4,7 @@ $text-color: white;
     background-color: $background;
     color: $text-color;
     height: 100vh;
+    font-family: 'Jura', sans-serif;
 
     &-nav{
         background-color: $background;
@@ -13,13 +14,28 @@ $text-color: white;
     &-body{
         flex-flow: column nowrap;
         align-items: center;
+        padding-top: 10px;
+        text-align: center;
+
+        .pic{
+            width: 80%;
+            height: auto;
+        }
+
+        .btn-container{
+            width: 80%;
+        }
 
         .btn{
-            width: 30%;
+            width: 40%;
+        }
+        .textarea{
+            width: 80%;
+        }
 
-            &-variant{
-                background-color: wheat;
-            }
+        .hr{
+            border: 0.5px solid rgb(126, 126, 126);
+            // width: 90%;
         }
     }
 }
