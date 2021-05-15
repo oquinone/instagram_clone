@@ -5,7 +5,7 @@ export const imageSlice = createSlice({
   initialState: {
     image: "",
     imageName: "",
-    uploadedImage: {},
+    uploadedImage: null,
     uploaded: false,
   },
   reducers: {
