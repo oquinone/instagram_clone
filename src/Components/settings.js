@@ -18,7 +18,7 @@ export const Settings = () => {
     //     // console.log(bio);
     // })
 
-    const updateDB = async () => {
+    const updateDB = () => {
         const url = "http://localhost:5000/edit";
         const options = {
             method: 'POST',
