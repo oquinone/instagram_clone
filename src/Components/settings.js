@@ -14,10 +14,6 @@ export const Settings = () => {
     const [bio, setBio] = useState("");
     const [username, setUsername] = useState("");
 
-    // useEffect(() => {
-    //     // console.log(bio);
-    // })
-
     const updateDB = () => {
         const url = "http://localhost:5000/edit";
         const options = {
