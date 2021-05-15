@@ -1,10 +1,10 @@
-import React from 'react';
+import React  from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import '../styling/navigation.scss';
 
 import { useDispatch } from 'react-redux';
-import { setImage, isUploaded } from '../redux/imageUpload';
+import { setImage, isUploaded, setUploadedImage } from '../redux/imageUpload';
 
 import { ReactComponent as Home } from '../svg/home.svg';
 import { ReactComponent as Upload } from '../svg/upload.svg';
@@ -14,17 +14,38 @@ import { ReactComponent as Profile} from '../svg/profile.svg';
 
 export const Navigation = () => {
     // Used to instantiate reducers ( functions ) in redux store
+    // const [test, setTest] = useState();
     const dispatch = useDispatch();
 
     // Creates DOMString for image
     // Image is stored in the browers
     // Updates Redux var image w/ URL
     // Able to use URL to retrieve image for displaying
-    const onFileChange = (e) => {
+    const convertBase64 = (file) => {
+        return new Promise((resolve, reject) => {
+            const fileReader = new FileReader();
+            fileReader.readAsDataURL(file);
+
+            fileReader.onload = () => {
+                resolve(fileReader.result);
+            };
+
+            fileReader.onerror = (error) => {
+                reject(error);
+            };
+        })
+
+    }
+
+    const onFileChange = async (e) => {
         e.preventDefault();
         const { files } = e.target;
         const localImageUrl = (URL.createObjectURL(files[0]));
         dispatch(setImage(localImageUrl));
+        // setTest(files[0]);
+        const b64Image = await convertBase64(files[0]);
+        // console.log(b64Image);
+        dispatch(setUploadedImage(b64Image));
         dispatch(isUploaded(true));
     }
 
