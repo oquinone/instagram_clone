@@ -11,21 +11,21 @@ import '../styling/globals.scss';
 // import { setBio, setUsername } from '../redux/imageUpload';
 
 import Sky from '../images/sky photo.jpg';
-import Nat_1 from '../images/nature_1.jpeg';
-import Nat_2 from '../images/nature_2.jpeg';
-import Nat_3 from '../images/nature_3.jpeg';
-import Nat_4 from '../images/nature_4.jpeg';
-import Nat_5 from '../images/nature_5.jpeg';
+// import Nat_1 from '../images/nature_1.jpeg';
+// import Nat_2 from '../images/nature_2.jpeg';
+// import Nat_3 from '../images/nature_3.jpeg';
+// import Nat_4 from '../images/nature_4.jpeg';
+// import Nat_5 from '../images/nature_5.jpeg';
 
-const pics = [Sky, Nat_1, Nat_2, Nat_3, Nat_4, Nat_5];
+// const pics = [Sky, Nat_1, Nat_2, Nat_3, Nat_4, Nat_5];
 
 
 export const Profile = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [apiData, setApiData] = useState();
+    const [images, setImages] = useState();
 
     const getAPIData = () => {
-        // console.log("Useefect")
         const uid = "609d7df80c94a510c2ff6921";
         const url = `http://localhost:5000/profile/${uid}`;
         const options = { method: 'GET' }
@@ -33,6 +33,8 @@ export const Profile = () => {
             .then(res => res.json())
             .then(data => {
                 setApiData(data)
+                // data["postedPhotos"].map(item => setImages(...images, URL.createObjectURL(item)));
+                setImages(data["postedPhotos"]);
                 setIsLoading(false);
             });
     }
@@ -79,11 +81,15 @@ export const Profile = () => {
 
             <section className="p-tb profile-bio">
                 <p>{apiData["profileBio"]}</p>
+                <hr/>
             </section>
 
             <section className="profile-uploads">
-                <div display="flex-sa">
-                    {pics.map((imgSrc, index) => (<img src={imgSrc} key={index} alt={index}/>))}
+                <div display="flex-sa ">
+                    {images !== undefined ? 
+                    (images.map((imgSrc, index) => (<img src={imgSrc} key={index} alt={index}/>))) 
+                    : 
+                    null}
                 </div>
             </section>
 
