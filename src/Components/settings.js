@@ -57,8 +57,6 @@ export const Settings = () => {
         // console.log(profilePic);
     }
 
-    
-
     return(
         <div className="settings">
             <Navbar className=" flex-sb settings-nav"> 
