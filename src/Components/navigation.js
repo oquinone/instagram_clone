@@ -34,7 +34,6 @@ export const Navigation = () => {
                 reject(error);
             };
         })
-
     }
 
     const onFileChange = async (e) => {
@@ -42,9 +41,7 @@ export const Navigation = () => {
         const { files } = e.target;
         const localImageUrl = (URL.createObjectURL(files[0]));
         dispatch(setImage(localImageUrl));
-        // setTest(files[0]);
         const b64Image = await convertBase64(files[0]);
-        // console.log(b64Image);
         dispatch(setUploadedImage(b64Image));
         dispatch(isUploaded(true));
     }

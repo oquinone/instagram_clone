@@ -7,10 +7,10 @@ import { Link } from 'react-router-dom';
 import '../styling/profile.scss';
 import '../styling/globals.scss';
 
-// import { useSelector, useDispatch } from 'react-redux';
-// import { setBio, setUsername } from '../redux/imageUpload';
+import { useDispatch } from 'react-redux';
+import { setProfileImage } from '../redux/imageUpload';
 
-import Sky from '../images/sky photo.jpg';
+// import Sky from '../images/sky photo.jpg';
 // import Nat_1 from '../images/nature_1.jpeg';
 // import Nat_2 from '../images/nature_2.jpeg';
 // import Nat_3 from '../images/nature_3.jpeg';
@@ -24,17 +24,18 @@ export const Profile = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [apiData, setApiData] = useState();
     const [images, setImages] = useState();
+    const dispatch = useDispatch();
 
     const getAPIData = () => {
-        const uid = "609d7df80c94a510c2ff6921";
+        const uid = "60a33f7388b7680ce6292e7e";
         const url = `http://localhost:5000/profile/${uid}`;
         const options = { method: 'GET' }
         fetch(url, options)
             .then(res => res.json())
             .then(data => {
                 setApiData(data)
-                // data["postedPhotos"].map(item => setImages(...images, URL.createObjectURL(item)));
                 setImages(data["postedPhotos"]);
+                dispatch(setProfileImage(data["profilePicture"]));
                 setIsLoading(false);
             });
     }
@@ -58,7 +59,7 @@ export const Profile = () => {
 
             <section className="flex-sb profile-p-all profile-user">
                 <div>
-                    <img src={Sky} alt="Profile Pic" className="profile-pic"/>
+                    <img src={apiData["profilePicture"]} alt="Profile Pic" className="profile-pic"/>
                 </div>
                 <div className="profile-stats">
                     <ul className="flex-se">
