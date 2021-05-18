@@ -26,7 +26,7 @@ const App = () => {
 
     const onSubmit = (data) => {
         setIsLoading(true);
-        const uid = "609d7df80c94a510c2ff6921";
+        const uid = "60a33f7388b7680ce6292e7e";
         const url = `http://localhost:5000/profile/${uid}`;
         const options = { 
             method: 'POST',
