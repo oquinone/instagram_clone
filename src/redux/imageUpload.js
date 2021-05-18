@@ -7,6 +7,7 @@ export const imageSlice = createSlice({
     imageName: "",
     uploadedImage: null,
     uploaded: false,
+    profileImage: ""
   },
   reducers: {
     setImage: (state, image) => {
@@ -21,10 +22,13 @@ export const imageSlice = createSlice({
     isUploaded: (state, check) => {
       state.uploaded = check;
     },
+    setProfileImage: (state, image) => {
+      state.profileImage = image;
+    }
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setImage, setImageName, setUploadedImage, isUploaded } = imageSlice.actions;
+export const { setImage, setImageName, setUploadedImage, isUploaded, setProfileImage } = imageSlice.actions;
 
 export default imageSlice.reducer
