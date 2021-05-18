@@ -57,6 +57,7 @@ $text-color: white;
         width: 75px;
         height: 75px;
         border-radius: 50%;
+        object-fit: cover;
     }
 
     &-edit{
@@ -87,6 +88,9 @@ $text-color: white;
                 width: 33.3vw;
                 height: 30vw;
                 border: 1px solid $background;
+                object-fit: cover;
+                background-color: black;
+                // display: inline-block;
             }
         }
     }
