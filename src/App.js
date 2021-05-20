@@ -7,6 +7,7 @@ import { Profile } from './Components/profile';
 // import { Feed } from './Components/feed';
 import { UploadFile } from './Components/modal';
 import { Settings } from './Components/settings';
+import { Login } from './Components/login';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { setImage, setUploadedImage } from './redux/imageUpload';
@@ -68,7 +69,7 @@ const App = () => {
                     </div>
                     <Switch>
                         <Route path="/" exact>
-                            <Likes />
+                            <Login />
                         </Route>
                         <Route path="/likes" exact>
                             <Likes />
