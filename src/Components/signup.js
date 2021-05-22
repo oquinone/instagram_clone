@@ -24,7 +24,7 @@ export const Signup = ({ login }) => {
                             <Form.Control type="password" placeholder="Password" />
                         </Form.Group>
                         <Form.Group controlId="formGroupPassword">
-                            <Form.Control type="password" placeholder="Enter Password" />
+                            <Form.Control type="password" placeholder="Enter Password Again" />
                         </Form.Group>
                     </Form> 
                 </div>
@@ -33,8 +33,7 @@ export const Signup = ({ login }) => {
                 </div>
                 <div className="login-signup">
                     <span>
-                        <p>Already Have An Account? </p>
-                        <h1 onClick={login}> Login</h1>
+                        <p>Already Have An Account? <em onClick={login}>Login</em> </p>
                     </span>
                 </div>
             </section>
