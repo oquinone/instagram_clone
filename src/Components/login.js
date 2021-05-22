@@ -9,9 +9,7 @@ import '../styling/globals.scss';
 export const Login = () => {
     const [isLogin, setIsLogin] = useState(true);
 
-    const hasAccount = () => {
-        setIsLogin(true);
-    }
+    const hasAccount = () => { setIsLogin(true); }
 
     if(!isLogin) return <Signup  login={hasAccount}/> 
 
