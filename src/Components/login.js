@@ -36,8 +36,7 @@ export const Login = () => {
                 </div>
                 <div className="login-signup">
                     <span>
-                        <p>Don't Have An Accountm  <em onClick = {() => setIsLogin(false)}> Sign up</em></p>
-                        {/* // <Button onClick = {() => setIsLogin(false)}> Sign up</Button> */}
+                        <p>Don't Have An Account?  <em onClick = {() => setIsLogin(false)}> Sign up</em></p>
                     </span>
                 </div>
             </section>
