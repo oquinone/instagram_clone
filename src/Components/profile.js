@@ -86,9 +86,9 @@ export const Profile = () => {
             </section>
 
             <section className="profile-uploads">
-                <div display="flex-sa ">
+                <div display="flex-sb">
                     {images !== undefined ? 
-                    (images.map((imgSrc, index) => (<img src={imgSrc} key={index} alt={index}/>))) 
+                    (images.reverse().map((imgSrc, index) => (<img src={imgSrc} key={index} alt={index}/>))) 
                     : 
                     null}
                 </div>

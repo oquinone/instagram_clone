@@ -30,7 +30,7 @@ const testObj = [
 },
     {
     profileImage: Pic, 
-    userName: "Blank_3",
+    userName: "Blank_4",
     activityType: 3
 }]
 
@@ -43,7 +43,7 @@ const textType = [
 
 const activity = (prop) => {
     return (
-        <div className="flex-sb activity">
+        <div className="flex-sb activity" key={prop.userName}>
             <div>
                 <img alt={prop.userName} src={prop.profileImage} />
             </div>

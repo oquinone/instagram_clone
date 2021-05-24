@@ -49,8 +49,7 @@ export const Navigation = () => {
     return (
     <nav className="flex-se navigation">
         <Link to="/likes">
-            <Home 
-            fill="white" /> 
+            <Home  fill="white" /> 
         </Link>
 
         <Button 
@@ -59,8 +58,7 @@ export const Navigation = () => {
         type="file"> 
             <label 
             htmlFor="navigation-input">
-                <Upload 
-                fill="white" />
+                <Upload fill="white" />
             </label>
 
             <input 
@@ -73,13 +71,11 @@ export const Navigation = () => {
         </Button>
 
         <Link to="/likes">
-            <Likes 
-                fill="white" />
+            <Likes fill="white" />
         </Link>
 
         <Link to="/profile"> 
-            <Profile 
-            fill="white" /> 
+            <Profile fill="white" /> 
         </Link>
     </nav>
     );
