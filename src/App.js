@@ -66,7 +66,7 @@ const App = () => {
                         open={isOpen} 
                         close={closeModal}
                         save={onSubmit}/> 
-                    </div>
+                    </div> 
                     <Switch>
                         <Route path="/" exact>
                             <Login />
