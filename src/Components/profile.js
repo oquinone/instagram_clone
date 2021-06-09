@@ -42,6 +42,7 @@ export const Profile = () => {
 
     useEffect(() => {
         getAPIData();
+        // eslint-disable-next-line
     }, [])
 
     if(isLoading){
