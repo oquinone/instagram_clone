@@ -16,10 +16,10 @@ export const Login = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const { signUpSuccessfull } = useSelector((state) => state.signUpStore);
 
-    const submit = () => {
-        const data = loginReq(email, password);
+    const submit = async () => {
+        const data = await loginReq(email, password);
         if(data['success']){
-            dispatch(setInfo(data['_info']));
+            dispatch(setInfo(data['user_id']));
             dispatch(setUsername(data['username']));
             setIsLoggedIn(true);
         }
