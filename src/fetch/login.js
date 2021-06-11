@@ -1,4 +1,4 @@
-export const loginReq = (email, password) => {
+export const loginReq = async (email, password) => {
     const url = "http://localhost:5000/login";
     const options = {
         method: 'POST',
@@ -10,7 +10,8 @@ export const loginReq = (email, password) => {
             password: password
         })
     }
-    fetch(url, options)
-    .then(res => res.json())
-    .then(data => {return data;});
+    const data = await fetch(url, options);
+    const dataJSON = await data.json();
+    console.log(dataJSON);
+    return dataJSON;
 }
