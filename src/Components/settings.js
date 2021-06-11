@@ -1,60 +1,27 @@
 import React, { useState } from 'react';
 import { Button, Navbar, Image, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { updateUserInfo } from '../fetch/settings';
+import { change } from '../helper/settings';
+import { useSelector } from 'react-redux';
 
 import '../styling/settings.scss';
 import '../styling/globals.scss';
-
 import { ReactComponent as Cancel } from '../svg/cancel.svg'
 import { ReactComponent as Save } from '../svg/save.svg'
-// import Sky from '../images/sky photo.jpg';
-import { useSelector } from 'react-redux';
 
 export const Settings = () => {
     const { profileImage } = useSelector((state) => state.newUpload);
+    const { _info } = useSelector((state) => state.signUpStore);
     const [profilePic, setProfilePic] = useState(profileImage.payload);
     const [bio, setBio] = useState("");
     const [username, setUsername] = useState("");
 
-    const convertBase64 = (file) => {
-        return new Promise((resolve, reject) => {
-            const fileReader = new FileReader();
-            fileReader.readAsDataURL(file);
-
-            fileReader.onload = () => {
-                resolve(fileReader.result);
-            };
-
-            fileReader.onerror = (error) => {
-                reject(error);
-            };
-        })
-    }
-
-    const updateDB = () => {
-        const url = "http://localhost:5000/edit";
-        const options = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-              },
-            body:JSON.stringify({
-                id: "60a33f7388b7680ce6292e7e",
-                username: username,
-                bio: bio,
-                image: profilePic
-            })
-        }
-        fetch(url, options)
-        .then(res => res.json())
-        .then(data => console.log(data));
-    }
+    const update = () => { updateUserInfo(_info.payload, username, bio, profilePic); }
 
     const changeProfileImage = async (e) => {
-        let b64Image; 
-        if(profilePic !== undefined) b64Image = await convertBase64(e.target.files[0]);
-        setProfilePic(b64Image);
-        // console.log(profilePic);
+        const newImage = await change(profilePic, e.target.files[0]);
+        if(newImage) { setProfilePic(newImage); }
     }
 
     return(
@@ -65,7 +32,7 @@ export const Settings = () => {
                 </Link>
                 <h1> Edit Profile</h1>
                 <Link to="/profile">
-                    <Save fill="white" onClick={() => updateDB()}/>
+                    <Save fill="white" onClick={() => update()}/>
                 </Link>
             </Navbar>
 

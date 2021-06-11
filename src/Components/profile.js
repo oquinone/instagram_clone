@@ -3,11 +3,12 @@ import { Button, Spinner } from 'react-bootstrap';
 import { Navigation } from './navigation';
 
 import { Link } from 'react-router-dom';
+import { getProfileData } from '../fetch/profile';
 
 import '../styling/profile.scss';
 import '../styling/globals.scss';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setProfileImage } from '../redux/imageUpload';
 
 // import Sky from '../images/sky photo.jpg';
@@ -22,28 +23,24 @@ import { setProfileImage } from '../redux/imageUpload';
 
 export const Profile = () => {
     const [isLoading, setIsLoading] = useState(true);
-    const [apiData, setApiData] = useState();
+    const [apiData, setApiData] = useState({});
     const [images, setImages] = useState();
+    // const [bio, setBio] = useState("");
     const dispatch = useDispatch();
-
-    const getAPIData = () => {
-        const uid = "60a33f7388b7680ce6292e7e";
-        const url = `http://localhost:5000/profile/${uid}`;
-        const options = { method: 'GET' }
-        fetch(url, options)
-            .then(res => res.json())
-            .then(data => {
-                setApiData(data)
-                setImages(data["postedPhotos"]);
-                dispatch(setProfileImage(data["profilePicture"]));
-                setIsLoading(false);
-            });
-    }
+    const { _info, username } = useSelector((state) => state.signUpStore);
 
     useEffect(() => {
-        getAPIData();
+        getData();
         // eslint-disable-next-line
     }, [])
+
+    const getData = async () => {
+        const data = await getProfileData(_info.payload);
+        setApiData(data)
+        setImages(data["postedPhotos"]);
+        dispatch(setProfileImage(data["profilePicture"]));
+        setIsLoading(false);
+    }
 
     if(isLoading){
         return <div className="flex-c spinner">
@@ -54,7 +51,7 @@ export const Profile = () => {
         <div className = "profile">
             <section className="flex-c profile-p-all profile-header">
                 <div>
-                    <h1>{apiData["username"]}</h1>
+                    <h1>{username.payload}</h1>
                 </div>
             </section>
 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
+import { signupReq } from '../fetch/signup';
 
 import '../styling/login.scss';
 import '../styling/globals.scss';
@@ -17,33 +18,16 @@ export const Signup = () => {
     const [signUp, setSignUp] = useState(false);
     const dispatch = useDispatch();
 
-    const apiRequest = (e) => {
-        const url = "http://localhost:5000/signup";
-        const options = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-              },
-            body:JSON.stringify({
-                username: username,
-                email: email,
-                password: password,
-                secondAttemptPassword: password2
-            })
+    const submit = () => {
+        const data = signupReq(username, email, password, password2);
+        if(data === "success"){
+            setSignUp(true);
         }
-        fetch(url, options)
-        .then(res => res.json())
-        .then(data => {
-            if(data === "Success"){
-                setSignUp(true);
-            }
-        });
     }
-
 
     if(signUp){
         dispatch(setSignUpSuccess(true));
-        return (<Redirect to="/" />)
+        return (<Redirect to="/" />);
     }
     return (
         <div className="login-container">
@@ -69,7 +53,7 @@ export const Signup = () => {
                     </Form> 
                 </div>
                 <div className="login-btn">
-                    <Button variant="success" onClick={() => apiRequest()}>Sign Up</Button>
+                    <Button variant="success" onClick={() => submit()}>Sign Up</Button>
                 </div>
                 <div className="login-signup">
                     <span>
