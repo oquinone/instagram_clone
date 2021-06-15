@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { Navigation } from './navigation';
 
@@ -10,22 +10,24 @@ import '../styling/profile.scss';
 import '../styling/globals.scss';
 
 import { useSelector } from 'react-redux';
+import { ReactComponent as Off} from '../svg/power-outline.svg';
 
 
 export const Profile = () => {
-    // const [isLoading, setIsLoading] = useState(true);
-    // const [apiData, setApiData] = useState({});
-    // const [images, setImages] = useState();
-    // const [bio, setBio] = useState("");
-    // const dispatch = useDispatch();
     const { username } = useSelector((state) => state.signUpStore);
     const { bio, postedPhotos, profilePhoto } = useSelector((state) => state.profile);
+    // eslint-disable-next-line
+    const [uploads, setUploads] = useState(postedPhotos.payload);
 
     return (
         <div className = "profile">
-            <section className="flex-c profile-p-all profile-header">
+            <section className=" flex-sb profile-p-all profile-header">
+                <div></div>
                 <div>
                     <h1>{username.payload}</h1>
+                </div>
+                <div className="logout">
+                    <Off fill="white"/>
                 </div>
             </section>
 
@@ -63,7 +65,7 @@ export const Profile = () => {
             <section className="profile-uploads">
                 <div display="flex-sb">
                     {postedPhotos.payload !== [] ? 
-                    ((postedPhotos.payload).reverse().map((imgSrc, index) => (<img src={imgSrc} key={index} alt={index}/>))) 
+                    (uploads.map((imgSrc, index) => (<img src={imgSrc} key={index} alt={index}/>))) 
                     : 
                     null}
                 </div>
