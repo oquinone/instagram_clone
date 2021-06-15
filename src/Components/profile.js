@@ -4,6 +4,7 @@ import { Navigation } from './navigation';
 
 import { Link } from 'react-router-dom';
 import { getProfileData } from '../fetch/profile';
+import Slug  from '../images/ucscsammy.jpeg';
 
 import '../styling/profile.scss';
 import '../styling/globals.scss';
@@ -37,8 +38,8 @@ export const Profile = () => {
     const getData = async () => {
         const data = await getProfileData(_info.payload);
         setApiData(data)
-        setImages(data["postedPhotos"]);
-        dispatch(setProfileImage(data["profilePicture"]));
+        if(data["profilePicture"] !== null){ dispatch(setProfileImage(data["profilePicture"])); }
+        if(data["postedPhotos"] !== null){ setImages(data["postedPhotos"]); }
         setIsLoading(false);
     }
 
@@ -57,7 +58,10 @@ export const Profile = () => {
 
             <section className="flex-sb profile-p-all profile-user">
                 <div>
-                    <img src={apiData["profilePicture"]} alt="Profile Pic" className="profile-pic"/>
+                    {(apiData["profilePicture"] === null) ? 
+                    (<img src={Slug} alt="Sammy The Slug" className="profile-pic"/>
+                    ) : (
+                    <img src={apiData["profilePicture"]} alt="Profile Pic" className="profile-pic"/>)}
                 </div>
                 <div className="profile-stats">
                     <ul className="flex-se">
