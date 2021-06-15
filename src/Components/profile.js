@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import { Button } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { Button, Spinner } from 'react-bootstrap';
 import { Navigation } from './navigation';
 
 import { Link } from 'react-router-dom';
-// import { getProfileData } from '../fetch/profile';
+import { getProfileData } from '../fetch/profile';
 import Slug  from '../images/ucscsammy.jpeg';
 
 import '../styling/profile.scss';
@@ -14,10 +14,29 @@ import { ReactComponent as Off} from '../svg/power-outline.svg';
 
 
 export const Profile = () => {
-    const { username } = useSelector((state) => state.signUpStore);
-    const { bio, postedPhotos, profilePhoto } = useSelector((state) => state.profile);
+    const { username, _info } = useSelector((state) => state.signUpStore);
+    const [profileData, setProfileData] = useState();
+    const [isLoading, setIsLoading] = useState(true);
+    // const { bio, postedPhotos, profilePhoto } = useSelector((state) => state.profile);
     // eslint-disable-next-line
-    const [uploads, setUploads] = useState(postedPhotos.payload);
+    // const [uploads, setUploads] = useState(postedPhotos.payload);
+
+    useEffect(() => {
+        makeRequest();
+        // eslint-disable-next-line
+    }, [])
+
+    const makeRequest = async () => {
+        const data = await getProfileData(_info.payload);
+        setProfileData(data);
+        setIsLoading(false);
+    }
+
+    if(isLoading){
+        return <div className="flex-c spinner">
+                <Spinner animation="border" variant="primary"/>
+            </div>
+    }
 
     return (
         <div className = "profile">
@@ -27,16 +46,16 @@ export const Profile = () => {
                     <h1>{username.payload}</h1>
                 </div>
                 <div className="logout">
-                    <Off fill="white"/>
+                    <Off fill="white" />
                 </div>
             </section>
 
             <section className="flex-sb profile-p-all profile-user">
                 <div>
-                    {(profilePhoto.payload === undefined) ? 
+                    {(profileData['profilePicture'] === undefined) ? 
                     (<img src={Slug} alt="Sammy The Slug" className="profile-pic"/>
                     ) : (
-                    <img src={profilePhoto} alt="Profile Pic" className="profile-pic"/>)}
+                    <img src={profileData['profilePicture']} alt="Profile Pic" className="profile-pic"/>)}
                 </div>
                 <div className="profile-stats">
                     <ul className="flex-se">
@@ -58,14 +77,14 @@ export const Profile = () => {
             </section>
 
             <section className="p-tb profile-bio">
-                <p>{bio.payload}</p>
+                <p>{profileData['profileBio']}</p>
                 <hr/>
             </section>
 
             <section className="profile-uploads">
                 <div display="flex-sb">
-                    {postedPhotos.payload !== [] ? 
-                    (uploads.map((imgSrc, index) => (<img src={imgSrc} key={index} alt={index}/>))) 
+                    {profileData['uploadedPhotos'] !== undefined ? 
+                    (profileData['uploadedPhotos'].map((imgSrc, index) => (<img src={imgSrc} key={index} alt={index}/>))) 
                     : 
                     null}
                 </div>
