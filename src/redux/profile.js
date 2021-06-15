@@ -6,22 +6,18 @@ export const profileSlice = createSlice({
         bio: "",
         postedPhotos: [],
         profilePhoto: "",
-        username: ""
     },
     reducers:{
         setBio: (state, bio) => {
             state.bio = bio;
         },
-        setPostedPhotos: (state, image) => {
-            state.postedPhotos = [...state.postedPhotos, image];
+        setPostedPhotos: (state, images) => {
+            state.postedPhotos = images;
         },
         setProfilePhoto: (state, image) => {
             state.profilePhoto =  image;
         },
-        setUsername: (state, name) => {
-            state.username = name;
-        }
     }
 });
-export const { setBio, setPostedPhotos, setProfilePhoto, setUsername } = profileSlice.actions;
+export const { setBio, setPostedPhotos, setProfilePhoto } = profileSlice.actions;
 export default profileSlice.reducer;
