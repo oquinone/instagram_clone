@@ -38,8 +38,8 @@ export const Profile = () => {
     const getData = async () => {
         const data = await getProfileData(_info.payload);
         setApiData(data)
-        if(data["profilePicture"] !== null){ dispatch(setProfileImage(data["profilePicture"])); }
-        if(data["postedPhotos"] !== null){ setImages(data["postedPhotos"]); }
+        if(data["profilePicture"] !== undefined){ dispatch(setProfileImage(data["profilePicture"])); }
+        if(data["postedPhotos"] !== undefined){ setImages(data["postedPhotos"]); }
         setIsLoading(false);
     }
 
@@ -58,7 +58,7 @@ export const Profile = () => {
 
             <section className="flex-sb profile-p-all profile-user">
                 <div>
-                    {(apiData["profilePicture"] === null) ? 
+                    {(apiData["profilePicture"] === undefined) ? 
                     (<img src={Slug} alt="Sammy The Slug" className="profile-pic"/>
                     ) : (
                     <img src={apiData["profilePicture"]} alt="Profile Pic" className="profile-pic"/>)}
