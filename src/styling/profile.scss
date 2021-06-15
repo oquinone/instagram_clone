@@ -14,9 +14,15 @@ $text-color: white;
     height: 100vh;
 
     &-header{
+        flex-flow: row nowrap;
+        width: 100%;
         background-color:$background;
         align-items: center;
         color: $text-color;
+
+        .logout{
+            cursor: pointer;
+        }
 
         .btn-link{
             border: none;
