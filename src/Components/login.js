@@ -7,10 +7,10 @@ import { loginReq } from '../fetch/login';
 import '../styling/login.scss';
 import '../styling/globals.scss';
 
-import { getProfileData } from '../fetch/profile';
+// import { getProfileData } from '../fetch/profile';
 import { useDispatch, useSelector } from 'react-redux';
 import { setInfo, setUsername } from '../redux/signup';
-import { setBio, setPostedPhotos, setProfilePhoto } from '../redux/profile';
+// import { setBio, setPostedPhotos, setProfilePhoto } from '../redux/profile';
 
 export const Login = () => {
     const dispatch = useDispatch();
@@ -27,14 +27,6 @@ export const Login = () => {
             setIsLoading(true);
             dispatch(setInfo(loginData['user_id']));
             dispatch(setUsername(loginData['username']));
-
-            const profileData = await getProfileData(loginData['user_id']);
-            console.log(profileData);
-            dispatch(setBio(profileData['profileBio']));
-            dispatch(setPostedPhotos(profileData['uploadedPhotos']));
-            if(profileData['profilePicture'] !== undefined){
-                dispatch(setProfilePhoto(profileData['profilePicture']));
-            }
             setIsLoggedIn(true);
         }
     }
