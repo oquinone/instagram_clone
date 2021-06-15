@@ -18,15 +18,15 @@ export const Signup = () => {
     const [signUp, setSignUp] = useState(false);
     const dispatch = useDispatch();
 
-    const submit = () => {
-        const data = signupReq(username, email, password, password2);
+    const submit = async () => {
+        const data = await signupReq(username, email, password, password2);
         if(data === "success"){
+            dispatch(setSignUpSuccess(true));
             setSignUp(true);
         }
     }
 
     if(signUp){
-        dispatch(setSignUpSuccess(true));
         return (<Redirect to="/" />);
     }
     return (
