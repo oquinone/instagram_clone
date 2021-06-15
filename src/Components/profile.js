@@ -1,53 +1,46 @@
-import React, { useEffect, useState } from 'react';
-import { Button, Spinner } from 'react-bootstrap';
+import React from 'react';
+import { Button } from 'react-bootstrap';
 import { Navigation } from './navigation';
 
 import { Link } from 'react-router-dom';
-import { getProfileData } from '../fetch/profile';
+// import { getProfileData } from '../fetch/profile';
 import Slug  from '../images/ucscsammy.jpeg';
 
 import '../styling/profile.scss';
 import '../styling/globals.scss';
 
-import { useDispatch, useSelector } from 'react-redux';
-import { setProfileImage } from '../redux/imageUpload';
-
-// import Sky from '../images/sky photo.jpg';
-// import Nat_1 from '../images/nature_1.jpeg';
-// import Nat_2 from '../images/nature_2.jpeg';
-// import Nat_3 from '../images/nature_3.jpeg';
-// import Nat_4 from '../images/nature_4.jpeg';
-// import Nat_5 from '../images/nature_5.jpeg';
-
-// const pics = [Sky, Nat_1, Nat_2, Nat_3, Nat_4, Nat_5];
+import { useSelector } from 'react-redux';
 
 
 export const Profile = () => {
-    const [isLoading, setIsLoading] = useState(true);
-    const [apiData, setApiData] = useState({});
-    const [images, setImages] = useState();
+    // const [isLoading, setIsLoading] = useState(true);
+    // const [apiData, setApiData] = useState({});
+    // const [images, setImages] = useState();
     // const [bio, setBio] = useState("");
-    const dispatch = useDispatch();
-    const { _info, username } = useSelector((state) => state.signUpStore);
+    // const dispatch = useDispatch();
+    const { username } = useSelector((state) => state.signUpStore);
+    const { bio, postedPhotos, profilePhoto } = useSelector((state) => state.profile);
 
-    useEffect(() => {
-        getData();
-        // eslint-disable-next-line
-    }, [])
+    // useEffect(() => {
+    //     getData();
+    //     // eslint-disable-next-line
+    // }, [])
 
-    const getData = async () => {
-        const data = await getProfileData(_info.payload);
-        setApiData(data)
-        if(data["profilePicture"] !== undefined){ dispatch(setProfileImage(data["profilePicture"])); }
-        if(data["postedPhotos"] !== undefined){ setImages(data["postedPhotos"]); }
-        setIsLoading(false);
-    }
+    // const getData = async () => {
+    //     const data = await getProfileData(_info.payload);
+    //     console.log(data);
+    //     setApiData(data)
+    //     // if(data["profilePicture"] !== null){ dispatch(setProfileImage(data["profilePicture"])); }
+    //     // if(data["postedPhotos"] !== undefined){  }
+    //     setImages(data["postedPhotos"]);
+    //     setIsLoading(false);
+    // }
 
-    if(isLoading){
-        return <div className="flex-c spinner">
-                <Spinner animation="border" variant="primary"/>
-            </div>
-    }
+    // if(isLoading){
+    //     return <div className="flex-c spinner">
+    //             <Spinner animation="border" variant="primary"/>
+    //         </div>
+    // }
     return (
         <div className = "profile">
             <section className="flex-c profile-p-all profile-header">
@@ -58,10 +51,10 @@ export const Profile = () => {
 
             <section className="flex-sb profile-p-all profile-user">
                 <div>
-                    {(apiData["profilePicture"] === undefined) ? 
+                    {(profilePhoto.payload === undefined) ? 
                     (<img src={Slug} alt="Sammy The Slug" className="profile-pic"/>
                     ) : (
-                    <img src={apiData["profilePicture"]} alt="Profile Pic" className="profile-pic"/>)}
+                    <img src={profilePhoto} alt="Profile Pic" className="profile-pic"/>)}
                 </div>
                 <div className="profile-stats">
                     <ul className="flex-se">
@@ -83,16 +76,16 @@ export const Profile = () => {
             </section>
 
             <section className="p-tb profile-bio">
-                <p>{apiData["profileBio"]}</p>
+                <p>{bio.payload}</p>
                 <hr/>
             </section>
 
             <section className="profile-uploads">
                 <div display="flex-sb">
-                    {images !== undefined ? 
-                    (images.reverse().map((imgSrc, index) => (<img src={imgSrc} key={index} alt={index}/>))) 
+                    {/* {postedPhotos.payload !== [] ? 
+                    (postedPhotos.reverse().map((imgSrc, index) => (<img src={imgSrc} key={index} alt={index}/>))) 
                     : 
-                    null}
+                    null} */}
                 </div>
             </section>
 
