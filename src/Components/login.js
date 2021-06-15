@@ -39,12 +39,6 @@ export const Login = () => {
         }
     }
 
-    const work = async () => {
-        await submit();
-        setIsLoading(false);
-        setIsLoggedIn(true);
-    }
-
     if(isLoggedIn){
         return(
             <Redirect to="/profile" />
