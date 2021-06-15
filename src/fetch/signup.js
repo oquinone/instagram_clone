@@ -1,4 +1,4 @@
-export const signupReq = (username, email, password, password2) => {
+export const signupReq = async (username, email, password, password2) => {
     const url = "http://localhost:5000/signup";
     const options = {
         method: 'POST',
@@ -12,7 +12,7 @@ export const signupReq = (username, email, password, password2) => {
             secondAttemptPassword: password2
         })
     }
-    fetch(url, options)
-    .then(res => res.json())
-    .then(data => { return data });
+    const data = await fetch(url, options)
+    const dataJSON = await data.json();
+    return dataJSON;
 }
