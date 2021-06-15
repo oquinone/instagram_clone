@@ -21,26 +21,6 @@ export const Profile = () => {
     const { username } = useSelector((state) => state.signUpStore);
     const { bio, postedPhotos, profilePhoto } = useSelector((state) => state.profile);
 
-    // useEffect(() => {
-    //     getData();
-    //     // eslint-disable-next-line
-    // }, [])
-
-    // const getData = async () => {
-    //     const data = await getProfileData(_info.payload);
-    //     console.log(data);
-    //     setApiData(data)
-    //     // if(data["profilePicture"] !== null){ dispatch(setProfileImage(data["profilePicture"])); }
-    //     // if(data["postedPhotos"] !== undefined){  }
-    //     setImages(data["postedPhotos"]);
-    //     setIsLoading(false);
-    // }
-
-    // if(isLoading){
-    //     return <div className="flex-c spinner">
-    //             <Spinner animation="border" variant="primary"/>
-    //         </div>
-    // }
     return (
         <div className = "profile">
             <section className="flex-c profile-p-all profile-header">
@@ -82,10 +62,10 @@ export const Profile = () => {
 
             <section className="profile-uploads">
                 <div display="flex-sb">
-                    {/* {postedPhotos.payload !== [] ? 
-                    (postedPhotos.reverse().map((imgSrc, index) => (<img src={imgSrc} key={index} alt={index}/>))) 
+                    {postedPhotos.payload !== [] ? 
+                    ((postedPhotos.payload).reverse().map((imgSrc, index) => (<img src={imgSrc} key={index} alt={index}/>))) 
                     : 
-                    null} */}
+                    null}
                 </div>
             </section>
 
