@@ -1,28 +1,48 @@
 import React, { useState } from 'react'
-import { Form, Button, Alert } from 'react-bootstrap';
+import { Form, Button, Alert, Spinner } from 'react-bootstrap';
 import { Link, Redirect } from 'react-router-dom';
 import Logo from '../images/logo.png';
 
-import { useSelector, useDispatch } from 'react-redux';
 import { loginReq } from '../fetch/login';
-import { setInfo, setUsername } from '../redux/signup';
 import '../styling/login.scss';
 import '../styling/globals.scss';
+
+import { getProfileData } from '../fetch/profile';
+import { useDispatch, useSelector } from 'react-redux';
+import { setInfo, setUsername } from '../redux/signup';
+import { setBio, setPostedPhotos, setProfilePhoto } from '../redux/profile';
 
 export const Login = () => {
     const dispatch = useDispatch();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const { signUpSuccessfull } = useSelector((state) => state.signUpStore);
 
     const submit = async () => {
-        const data = await loginReq(email, password);
-        if(data['success']){
-            dispatch(setInfo(data['user_id']));
-            dispatch(setUsername(data['username']));
+        const loginData = await loginReq(email, password);
+
+        if(loginData['success']){
+            setIsLoading(true);
+            dispatch(setInfo(loginData['user_id']));
+            dispatch(setUsername(loginData['username']));
+
+            const profileData = await getProfileData(loginData['user_id']);
+            console.log(profileData);
+            dispatch(setBio(profileData['profileBio']));
+            dispatch(setPostedPhotos(profileData['uploadedPhotos']));
+            if(profileData['profilePicture'] !== undefined){
+                dispatch(setProfilePhoto(profileData['profilePicture']));
+            }
             setIsLoggedIn(true);
         }
+    }
+
+    const work = async () => {
+        await submit();
+        setIsLoading(false);
+        setIsLoggedIn(true);
     }
 
     if(isLoggedIn){
@@ -30,6 +50,13 @@ export const Login = () => {
             <Redirect to="/profile" />
         );
     }
+
+    if(isLoading){
+        return <div className="flex-c spinner">
+                <Spinner animation="border" variant="primary"/>
+            </div>
+    }
+
     return (
         <div className="login-container">
             <section className="flex-c login">
