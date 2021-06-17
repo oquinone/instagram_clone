@@ -9,10 +9,10 @@ import '../styling/settings.scss';
 import '../styling/globals.scss';
 import { ReactComponent as Cancel } from '../svg/cancel.svg'
 import { ReactComponent as Save } from '../svg/save.svg'
+import Slug from '../images/ucscsammy.jpeg';
 
 export const Settings = () => {
     const { profilePhoto } = useSelector((state) => state.profile);
-    // const { _info } = useSelector((state) => state.signUpStore);
     const [profilePic, setProfilePic] = useState(profilePhoto.payload);
     const [bio, setBio] = useState("");
     const [username, setUsername] = useState("");
@@ -20,7 +20,7 @@ export const Settings = () => {
     const update = () => { updateUserInfo(username, bio, profilePic); }
 
     const changeProfileImage = async (e) => {
-        const newImage = await change(profilePic, e.target.files[0]);
+        const newImage = await change(e.target.files[0]);
         if(newImage) { setProfilePic(newImage); }
     }
 
@@ -44,7 +44,7 @@ export const Settings = () => {
                         {profilePic !== undefined ? 
                         ( <Image src={profilePic} className="pic" thumbnail/>) 
                         : 
-                        ( null )
+                        ( <Image src={Slug} className="pic" thumbnail/> )
                         }
                     </label>
 
