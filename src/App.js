@@ -8,16 +8,19 @@ import { Profile } from './Components/profile';
 import { UploadFile } from './Components/modal';
 import { Settings } from './Components/settings';
 import { Login } from './Components/login';
+import { Signup } from './Components/signup';
+import { uploadNewImage } from './fetch/app';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { setImage, setUploadedImage } from './redux/imageUpload';
 
 const App = () => {
+    const dispatch = useDispatch();
+    // const { _info } = useSelector((state) => state.signUpStore);
     const [isOpen, setIsOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const { uploaded } = useSelector((state) => state.newUpload);
     const { image, uploadedImage } = useSelector((state) => state.newUpload);
-    const dispatch = useDispatch();
 
     useEffect(() => {
         if(uploaded.payload) {
@@ -25,25 +28,10 @@ const App = () => {
         }
     }, [uploaded]);
 
-    const onSubmit = (data) => {
+    const submit = async () => {
         setIsLoading(true);
-        const uid = "60a33f7388b7680ce6292e7e";
-        const url = `http://localhost:5000/profile/${uid}`;
-        const options = { 
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                photo: uploadedImage.payload
-            }) 
-        };
-        fetch(url, options)
-            .then(res => res.json())
-            .then(data => {
-                console.log(data);
-                closeModal();
-            });
+        await uploadNewImage(uploadedImage.payload);
+        closeModal();
     }
 
     const closeModal = (e) =>{
@@ -65,11 +53,14 @@ const App = () => {
                         <UploadFile 
                         open={isOpen} 
                         close={closeModal}
-                        save={onSubmit}/> 
+                        save={submit}/> 
                     </div> 
                     <Switch>
                         <Route path="/" exact>
                             <Login />
+                        </Route>
+                        <Route path="/signup" exact>
+                            <Signup />
                         </Route>
                         <Route path="/likes" exact>
                             <Likes />
