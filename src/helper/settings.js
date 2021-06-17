@@ -1,6 +1,5 @@
 export const change = async (profilePic, file) => {
     if(profilePic !== undefined){
-        
         return (await convertBase64(file));
     }
     return null;
