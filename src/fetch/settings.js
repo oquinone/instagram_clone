@@ -1,4 +1,4 @@
-export const updateUserInfo = async (id, username, bio, profilePic) => {
+export const updateUserInfo = async (username, bio, profilePic) => {
     const url = "http://localhost:5000/edit";
     const options = {
         method: 'POST',
@@ -7,11 +7,11 @@ export const updateUserInfo = async (id, username, bio, profilePic) => {
             'Accept': 'appliation.josn'
           },
         body:JSON.stringify({
-            id: id,
             username: username,
             bio: bio,
             image: profilePic
-        })
+        }),
+        credentials: 'include'
     }
     await fetch(url, options);
     // const dataJSON = await data.json();

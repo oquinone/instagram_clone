@@ -8,7 +8,8 @@ export const loginReq = async (email, password) => {
         body:JSON.stringify({
             email: email,
             password: password
-        })
+        }),
+        credentials: 'include'
     }
     const data = await fetch(url, options);
     const dataJSON = await data.json();
