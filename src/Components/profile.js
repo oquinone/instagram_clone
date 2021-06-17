@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button, Spinner } from 'react-bootstrap';
 import { Navigation } from './navigation';
 
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { getProfileData } from '../fetch/profile';
 import Slug  from '../images/ucscsammy.jpeg';
 
@@ -11,12 +11,14 @@ import '../styling/globals.scss';
 
 import { useSelector } from 'react-redux';
 import { ReactComponent as Off} from '../svg/power-outline.svg';
+import { logout } from '../fetch/logout'; 
 
 
 export const Profile = () => {
-    const { username, _info } = useSelector((state) => state.signUpStore);
+    const { username } = useSelector((state) => state.signUpStore);
     const [profileData, setProfileData] = useState();
     const [isLoading, setIsLoading] = useState(true);
+    const [isLoggedOut, setIsLoggedOut] = useState(false);
     // const { bio, postedPhotos, profilePhoto } = useSelector((state) => state.profile);
     // eslint-disable-next-line
     // const [uploads, setUploads] = useState(postedPhotos.payload);
@@ -27,9 +29,25 @@ export const Profile = () => {
     }, [])
 
     const makeRequest = async () => {
-        const data = await getProfileData(_info.payload);
-        setProfileData(data);
-        setIsLoading(false);
+        const data = await getProfileData();
+        if(data === "Not Auth"){
+            setIsLoggedOut(true);
+        }
+        else{
+            setProfileData(data);
+            setIsLoading(false);
+        }
+    }
+
+    const signOut = async () => {
+        await logout();
+        setIsLoggedOut(true);
+    }
+
+    if(isLoggedOut){
+        return(
+            <Redirect to="/" />
+        );
     }
 
     if(isLoading){
@@ -46,7 +64,7 @@ export const Profile = () => {
                     <h1>{username.payload}</h1>
                 </div>
                 <div className="logout">
-                    <Off fill="white" />
+                    <Off fill="white" onClick={() => signOut()} />
                 </div>
             </section>
 
@@ -84,7 +102,7 @@ export const Profile = () => {
             <section className="profile-uploads">
                 <div display="flex-sb">
                     {profileData['uploadedPhotos'] !== undefined ? 
-                    (profileData['uploadedPhotos'].map((imgSrc, index) => (<img src={imgSrc} key={index} alt={index}/>))) 
+                    (profileData['uploadedPhotos'].reverse().map((imgSrc, index) => (<img src={imgSrc} key={index} alt={index}/>))) 
                     : 
                     null}
                 </div>
