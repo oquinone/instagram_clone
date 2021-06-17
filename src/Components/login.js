@@ -7,10 +7,8 @@ import { loginReq } from '../fetch/login';
 import '../styling/login.scss';
 import '../styling/globals.scss';
 
-// import { getProfileData } from '../fetch/profile';
 import { useDispatch, useSelector } from 'react-redux';
-import { setInfo, setUsername } from '../redux/signup';
-// import { setBio, setPostedPhotos, setProfilePhoto } from '../redux/profile';
+import { setUsername } from '../redux/signup';
 
 export const Login = () => {
     const dispatch = useDispatch();
@@ -25,7 +23,6 @@ export const Login = () => {
 
         if(loginData['success']){
             setIsLoading(true);
-            dispatch(setInfo(loginData['user_id']));
             dispatch(setUsername(loginData['username']));
             setIsLoggedIn(true);
         }
