@@ -1,11 +1,10 @@
-export const change = async (profilePic, file) => {
-    if(profilePic !== undefined){
-        return (await convertBase64(file));
-    }
-    return null;
+export const change = async (file) => {
+    return (await convertBase64(file));
 }
 
-const convertBase64 = (file) => {
+//Creates DOMString for image
+// Image is stored in the browers
+export const convertBase64 = (file) => {
     return new Promise((resolve, reject) => {
         const fileReader = new FileReader();
         fileReader.readAsDataURL(file);
