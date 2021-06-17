@@ -11,13 +11,13 @@ import { ReactComponent as Cancel } from '../svg/cancel.svg'
 import { ReactComponent as Save } from '../svg/save.svg'
 
 export const Settings = () => {
-    const { profileImage } = useSelector((state) => state.newUpload);
-    const { _info } = useSelector((state) => state.signUpStore);
-    const [profilePic, setProfilePic] = useState(profileImage.payload);
+    const { profilePhoto } = useSelector((state) => state.profile);
+    // const { _info } = useSelector((state) => state.signUpStore);
+    const [profilePic, setProfilePic] = useState(profilePhoto.payload);
     const [bio, setBio] = useState("");
     const [username, setUsername] = useState("");
 
-    const update = () => { updateUserInfo(_info.payload, username, bio, profilePic); }
+    const update = () => { updateUserInfo(username, bio, profilePic); }
 
     const changeProfileImage = async (e) => {
         const newImage = await change(profilePic, e.target.files[0]);
