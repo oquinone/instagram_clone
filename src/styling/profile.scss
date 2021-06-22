@@ -1,5 +1,7 @@
-$background: #242526;
-$text-color: white;
+@import './mixins.scss';
+// $background: #242526;
+$background:  rgb(255, 255, 255);
+$text-color: #242526;
 
 .spinner{
     width: 100%;
@@ -12,6 +14,8 @@ $text-color: white;
 .profile{
     background-color: $background;
     height: 100vh;
+    overflow: scroll;
+    overflow-x: hidden;
 
     &-header{
         flex-flow: row nowrap;
@@ -19,6 +23,7 @@ $text-color: white;
         background-color:$background;
         align-items: center;
         color: $text-color;
+        
 
         .logout{
             cursor: pointer;
@@ -38,13 +43,27 @@ $text-color: white;
     }
 
     &-user{
+        display: flex;
+        flex-flow: row nowrap;
+        @include breakpoint-down(small){
+            justify-content: space-evenly;
+        }
+        @include breakpoint-up(medium){
+            justify-content: space-evenly;
+            margin: 0 5em;
+        }
         align-items: center;
         background-color: $background;
         color: $text-color;
+        // border: 1px solid red;
     }
 
-    &-stats{
-        padding: 1.5rem 0px;
+    &-stats-mobile{
+        @include breakpoint-up(medium){
+            display: none;
+        }
+        width: 80%;
+        padding-left: 1em;
         ul{
             flex-flow: row nowrap;
             list-style-type: none;
@@ -53,15 +72,63 @@ $text-color: white;
     
             li{
                 font-size: 13px;
-                padding: 0px 10px;
+                // padding: 0px 10px;
                 text-align: center;
             }
         }
     }
 
+    &-stats{
+        @include breakpoint-down(small){
+            display: none;
+        }
+        
+        .info{
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            h1{
+                font-size: 2em;
+            }
+        }
+
+        .status{
+            display: flex;
+            flex-flow: row nowrap;
+            margin: .5em 0;
+
+            &-flex{
+                display: flex;
+                flex-flow: row nowrap;
+                align-items: baseline;
+                padding: 0 2em 0 0;
+                h4{
+                    font-size: 18px;
+                    font-weight: 700;
+                }
+                h4, h5{
+                    padding: 5px 2px;
+                    font-family: 'Convergence', sans-serif;
+                }
+                h5{
+                    font-size: 15px;
+                    font-weight: 300;
+                }
+            }
+        
+        }
+    }
+
     &-pic{
-        width: 75px;
-        height: 75px;
+        @include breakpoint-up(medium){
+            // transition: width 1s, height 1s;
+            width: 9em;
+            height: 9em;
+        }
+        width: 6em;
+        height: 6em;
         border-radius: 50%;
         object-fit: cover;
     }
@@ -82,28 +149,81 @@ $text-color: white;
     }
 
     &-bio{
-        background-color: $background;
-        color: $text-color;
+        &-mobile{
+            @include breakpoint-up(medium){
+                display: none;
+            }
+            margin: 0 1em;
+            text-align: left;
+            background-color: $background;
+            color: $text-color;
+        }
+        // background-color: $background;
+        // color: $text-color;
+    }
+    
+    &-followers-mobile{
+        @include breakpoint-up(medium){
+            &{
+                display: none;
+            }
+            &-hr{
+                display: none;
+            }
+        }
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-evenly;
+        margin: 0;
+
+        &-flex{
+            display: flex;
+            flex-flow: column nowrap;
+            text-align: center;
+            h5{
+                font-size: 13px;
+                font-weight: 900;
+                margin: 0;
+            }
+
+        }
     }
 
     &-uploads{
-        div{
+        @include breakpoint-up(medium){
+            width: 75%;
+        }
+        width: 100%;
+        margin: auto;
+        &-flex{
+            display: flex;
             flex-flow: row wrap;
-            img{
-                //Need to fix width to adjust as needed
-                width: 33.3vw;
-                height: 30vw;
-                border: 1px solid $background;
-                object-fit: cover;
-                background-color: black;
-                // display: inline-block;
+            align-items: center;
+            // justify-content: 
+            margin: auto;
+            
+            div{
+
+                @include breakpoint-up(large){
+                    margin: .9em;
+                }
+                margin: 1px;
+                img{
+                    @include breakpoint-down(small){
+                        width:32.5vw;
+                        height: 32vw;
+                    }
+                    width: 22vw;
+                    height: 22vw;
+                    object-fit: cover;
+                }
             }
         }
     }
 
     &-nav{
         position: fixed;
-        bottom: 0;
+        top: 0;
         width: 100%;
     }
 }
