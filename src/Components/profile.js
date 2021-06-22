@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Spinner } from 'react-bootstrap';
-import { Navigation } from './navigation';
+// import { Navigation } from './navigation';
 
 import { Link, Redirect } from 'react-router-dom';
 import { getProfileData } from '../fetch/profile';
@@ -61,56 +61,109 @@ export const Profile = () => {
             <section className=" flex-sb profile-p-all profile-header">
                 <div></div>
                 <div>
-                    <h1>{username.payload}</h1>
+                    {username.payload}
                 </div>
                 <div className="logout">
                     <Off fill="white" onClick={() => signOut()} />
                 </div>
             </section>
+            <hr/>
 
-            <section className="flex-sb profile-p-all profile-user">
+            <section className="profile-p-all profile-user">
                 <div>
                     {(profileData['profilePicture'] === undefined) ? 
                     (<img src={Slug} alt="Sammy The Slug" className="profile-pic"/>
                     ) : (
                     <img src={profileData['profilePicture']} alt="Profile Pic" className="profile-pic"/>)}
                 </div>
+                <div className="profile-stats-mobile">
+                    <div>
+                        <h1>username</h1>
+                    </div>
+                    <div className="p-tb profile-edit">
+                        <Link to="edit">
+                            <Button 
+                            variant="secondary" 
+                            block size="sm"
+                            className="textStyle"
+                            >Edit Profile</Button>
+                        </Link>
+                    </div>
+                </div>
                 <div className="profile-stats">
-                    <ul className="flex-se">
-                        <li> 8 <br/> Post </li>
-                        <li> 8 <br/> Followers </li>
-                        <li> 5 <br/> Following </li>
-                    </ul>
+                    <div className="info">
+                        <div className="info-username">
+                            <h1>username</h1>
+                        </div>
+                        <div className="p-tb profile-edit">
+                            <Link to="edit">
+                                <Button 
+                                variant="secondary" 
+                                block size="sm"
+                                className="textStyle"
+                                >Edit Profile</Button>
+                            </Link>
+                        </div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                    <div className="status">
+                        <div className="status-flex">
+                            <h4>8</h4> 
+                            <h5>Post</h5>
+                        </div>
+                        <div className="status-flex">
+                            <h4>9</h4> 
+                            <h5>Followers</h5>
+                        </div>
+                        <div className="status-flex">
+                            <h4>10</h4> 
+                            <h5>Following</h5>
+                        </div>
+                    </div>
+                    <div className="profile-bio">
+                        <p>{profileData['profileBio']}</p>
+                    </div>
+                </div>
+
+                <div className="extra"></div>
+                <div className="extra"></div>
+            </section>
+
+            <section className="p-tb profile-bio-mobile">
+                <p>{profileData['profileBio']}</p>
+            </section>
+            {/* <hr/> */}
+
+            <section className="profile-followers-mobile">
+                <div className="profile-followers-mobile-flex">
+                    <h5>8</h5> 
+                    <h5>Post</h5>
+                </div>
+                <div className="profile-followers-mobile-flex">
+                    <h5>9</h5> 
+                    <h5>Followers</h5>
+                </div>
+                <div className="profile-followers-mobile-flex">
+                    <h5>15</h5> 
+                    <h5>Following</h5>
                 </div>
             </section>
-            
-            <section className="p-tb profile-edit">
-                <Link to="edit">
-                    <Button 
-                    variant="secondary" 
-                    block size="sm"
-                    className="textStyle"
-                    >Edit Profile</Button>
-                </Link>
-            </section>
-
-            <section className="p-tb profile-bio">
-                <p>{profileData['profileBio']}</p>
-                <hr/>
-            </section>
+            <hr className="profile-followers-mobile-hr"/>
 
             <section className="profile-uploads">
-                <div display="flex-sb">
+                <hr/>
+                <div className="profile-uploads-flex">
                     {profileData['uploadedPhotos'] !== undefined ? 
-                    (profileData['uploadedPhotos'].reverse().map((imgSrc, index) => (<img src={imgSrc} key={index} alt={index}/>))) 
+                    (profileData['uploadedPhotos'].reverse().map((imgSrc, index) => (<div><img src={imgSrc} key={index} alt={index}/></div>))) 
                     : 
                     null}
                 </div>
             </section>
 
-            <div className="profile-nav">
+            {/* <div className="profile-nav">
                 <Navigation/>
-            </div>
+            </div> */}
         </div>
     )
 }
