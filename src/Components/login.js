@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { Form, Button, Alert, Spinner } from 'react-bootstrap';
 import { Link, Redirect } from 'react-router-dom';
+import { loginReq } from '../fetch/login';
 import Logo from '../images/logo.png';
 
-import { loginReq } from '../fetch/login';
 import '../styling/login.scss';
 import '../styling/globals.scss';
 
@@ -13,11 +13,12 @@ import { setUsername } from '../redux/signup';
 export const Login = () => {
     const dispatch = useDispatch();
     const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
+    const [password, setPassword] = useState("");
     const { signUpSuccessfull } = useSelector((state) => state.signUpStore);
 
+    // Checks if Credentials are Correct
     const submit = async () => {
         const loginData = await loginReq(email, password);
 
