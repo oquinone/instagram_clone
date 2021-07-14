@@ -1,0 +1,10 @@
+.followers{
+    
+    width: 50%;
+    margin: auto;
+    &-card{
+        background-color: rgb(195, 190, 199);
+        flex-flow: row nowrap;
+        border: 1px solid black;
+    }
+}
