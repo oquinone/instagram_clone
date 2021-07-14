@@ -3,21 +3,13 @@ import { createSlice } from '@reduxjs/toolkit';
 export const profileSlice = createSlice({
     name: 'profile',
     initialState:{
-        bio: "",
-        postedPhotos: [],
-        profilePhoto: "",
+        pData: {}
     },
     reducers:{
-        setBio: (state, bio) => {
-            state.bio = bio;
-        },
-        setPostedPhotos: (state, images) => {
-            state.postedPhotos = images;
-        },
-        setProfilePhoto: (state, image) => {
-            state.profilePhoto =  image;
-        },
+        setProfileData: (state, data) => {
+            state.pData = data;
+        }
     }
 });
-export const { setBio, setPostedPhotos, setProfilePhoto } = profileSlice.actions;
+export const { setProfileData } = profileSlice.actions;
 export default profileSlice.reducer;
