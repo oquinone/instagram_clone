@@ -9,6 +9,7 @@ import { UploadFile } from './Components/modal';
 import { Settings } from './Components/settings';
 import { Login } from './Components/login';
 import { Signup } from './Components/signup';
+// import { Followers } from './Components/followers';
 import { uploadNewImage } from './fetch/app';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -71,6 +72,9 @@ const App = () => {
                         <Route path="/edit" exact>
                             <Settings />
                         </Route>
+                        {/* <Route path="/followers" exact>
+                            <Followers />
+                        </Route> */}
                     </Switch>
                 </div>
         </Router>
