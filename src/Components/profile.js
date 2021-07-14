@@ -26,15 +26,8 @@ export const Profile = () => {
         // eslint-disable-next-line
     }, [])
 
-    // useEffect(() => {
-    //     if(!isLoading){
-    //         const data = group(profileData['uploadedPhotos']);
-    //         console.log(data);
-    //     }
-    // }, [isLoading])
-
     const makeRequest = async () => {
-        if(pData.payload === {}){
+        if(!pData.payload){
             const data = await getProfileData();
             if(data === "Not Auth"){
                 setIsLoggedOut(true);
