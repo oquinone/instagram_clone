@@ -1,17 +1,21 @@
 import React, { useState } from 'react'
 import { Form, Button, Alert, Spinner } from 'react-bootstrap';
 import { Link, Redirect } from 'react-router-dom';
-import { loginReq } from '../fetch/login';
-import Logo from '../images/logo.png';
 
+// Imported Functions
+import { loginReq } from '../fetch/login';
+
+//Styling & Images
 import '../styling/login.scss';
 import '../styling/globals.scss';
+import Logo from '../images/logo.png';
 
-import { useDispatch, useSelector } from 'react-redux';
-import { setUsername } from '../redux/signup';
+//Redux
+import { useSelector } from 'react-redux';
+// import { setUsername } from '../redux/signup';
 
 export const Login = () => {
-    const dispatch = useDispatch();
+    // const dispatch = useDispatch();
     const [email, setEmail] = useState("");
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
@@ -24,7 +28,7 @@ export const Login = () => {
 
         if(loginData['success']){
             setIsLoading(true);
-            dispatch(setUsername(loginData['username']));
+            // dispatch(setUsername(loginData['username']));
             setIsLoggedIn(true);
         }
     }

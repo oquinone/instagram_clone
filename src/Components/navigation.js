@@ -1,22 +1,27 @@
-import React  from 'react';
-import { Link } from 'react-router-dom';
-import { Button } from 'react-bootstrap';
-import '../styling/navigation.scss';
-import { convertBase64 } from '../helper/settings';
+import React, { useState, useRef, useEffect }  from 'react';
+import { Link, Redirect } from 'react-router-dom';
+import { Button, Overlay, Popover } from 'react-bootstrap';
 
+//Imported Functions
+import { convertBase64 } from '../helper/settings';
+import { logout } from '../fetch/logout'; 
+
+//Redux
 import { useDispatch } from 'react-redux';
 import { setImage, isUploaded, setUploadedImage } from '../redux/imageUpload';
 
+//Styling & Images
+import '../styling/navigation.scss';
 import { ReactComponent as Home } from '../svg/home.svg';
 import { ReactComponent as Upload } from '../svg/upload.svg';
-import { ReactComponent as Likes } from '../svg/likes.svg';
+import { ReactComponent as LikesSVG } from '../svg/likes.svg';
 import { ReactComponent as Profile} from '../svg/profile.svg';
-
+import { ReactComponent as Off} from '../svg/power-outline.svg';
 
 export const Navigation = () => {
     // Used to instantiate reducers ( functions ) in redux store
-    // const [test, setTest] = useState();
     const dispatch = useDispatch();
+    const [isLoggedOut, setIsLoggedOut] = useState(false);
 
     const onFileChange = async (e) => {
         e.preventDefault();
@@ -28,19 +33,35 @@ export const Navigation = () => {
         dispatch(isUploaded(true));
     }
 
+    const signOut = async () => {
+        await logout();
+        setIsLoggedOut(true);
+    }
+
+    if(isLoggedOut){
+        return(
+            <Redirect to="/" />
+        );
+    }
+
     return (
-    <nav className="flex-se navigation">
-        <Link to="/likes">
-            <Home  fill="white" /> 
+    <nav className="flex-c navigation">
+        <div className="flex-containers"></div>
+        <div className="flex-containers"> </div>
+        <div className="flex-se flex-containers">
+        <Link to="/home">
+            <Home  fill="black" /> 
         </Link>
 
         <Button 
         variant="link" 
         size="lg" 
-        type="file"> 
+        type="file"
+        className="navigation-btn"> 
             <label 
-            htmlFor="navigation-input">
-                <Upload fill="white" />
+            htmlFor="navigation-input"
+            >
+                <Upload fill="black"/>
             </label>
 
             <input 
@@ -52,13 +73,49 @@ export const Navigation = () => {
             onChange={e => onFileChange(e)} />
         </Button>
 
-        <Link to="/likes">
-            <Likes fill="white" />
-        </Link>
+        {/* <Link to="/likes">
+            <Likes fill="black" />
+        </Link> */}
+        <div>
+            <LikesSVG fill="black" onClick={() => LikesPopover()}/>
+        
+        </div>
 
         <Link to="/profile"> 
-            <Profile fill="white" /> 
+            <Profile fill="black" /> 
         </Link>
+            <Off fill="white" onClick={() => signOut()} />
+        </div>
     </nav>
+    );
+}
+
+const LikesPopover = (e) => {
+    const [show, setShow] = useState(false);
+    const [target, setTarget] = useState(null);
+    const ref = useRef(null); 
+
+    useEffect(() => {
+        setShow(!show);
+        setTarget(e.target);
+        // eslint-disable-next-line
+    }, [show]);
+
+    return(
+        <div ref={ref}>
+            <Overlay
+                show={show}
+                target={target}
+                placemen="bottom"
+                container={ref.current}
+                containerPadding={20}
+            >
+                <Popover id="popover-contained">
+                <Popover.Content>
+                    <strong>Holy guacamole!</strong> Check this info.
+                </Popover.Content>
+                </Popover>
+            </Overlay>
+        </div>
     );
 }
