@@ -1,5 +1,5 @@
 export const getProfileData = async () => {
-    const url = `http://localhost:5000/profile`;
+    const url = `https://invulnerable-moliere-82505.herokuapp.com/profile`;
     const options = { 
         method: 'GET',
         credentials: 'include',
