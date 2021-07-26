@@ -12,30 +12,48 @@ import '../styling/globals.scss';
 import Slug  from '../images/ucscsammy.jpeg';
 
 //Redux
-import { useSelector, useDispatch } from 'react-redux';
-import { setProfileData } from '../redux/profile';
+import { useDispatch, useSelector } from 'react-redux';
+import { setUpdateUser, setProfilePicture } from '../redux/profile';
 
 export const Profile = () => {
     const dispatch = useDispatch();
-    const { pData } = useSelector((state) => state.profile);
+    const { updateUser } = useSelector((state) => state.profile);
+    const [pData, setProfileData] = useState(null);
+    const [images, setImages]  = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [isLoggedOut, setIsLoggedOut] = useState(false);
 
     useEffect(() => {
         makeRequest();
-        // eslint-disable-next-line
     }, [])
 
+    // useEffect(() => {
+    //     if(!pData){
+    //         const img = group(pData['uploadedPhotos']);
+    //         setImages(img);
+    //     }
+    // }, [pData])
+
     const makeRequest = async () => {
-        if(!pData.payload){
+        if(!pData){
             const data = await getProfileData();
+
             if(data === "Not Auth"){
                 setIsLoggedOut(true);
             }
             else{
-                dispatch(setProfileData(data));
+                const img = group(data['uploadedPhotos']);
+                setImages(img);
+                setProfileData(data);
+                dispatch(setProfilePicture(data['profilePicture']))
                 setIsLoading(false);
             }
+        }
+        else if(updateUser.payload){
+            console.log("we entered");
+            const data = await getProfileData();
+            setProfileData(data);
+            dispatch(setUpdateUser(false));
         }
         else{
             setIsLoading(false);
@@ -63,14 +81,14 @@ export const Profile = () => {
 
             <section className="profile-p-all profile-user">
                 <div>
-                    {(pData.payload['profilePicture'] === undefined) ? 
+                    {(pData['profilePicture'] === undefined) ? 
                     (<img src={Slug} alt="Sammy The Slug" className="profile-pic"/>
                     ) : (
-                    <img src={pData.payload['profilePicture']} alt="Profile Pic" className="profile-pic"/>)}
+                    <img src={pData['profilePicture']} alt="Profile Pic" className="profile-pic"/>)}
                 </div>
                 <div className="profile-stats-mobile">
                     <div>
-                        <h1>{pData.payload['username']}</h1>
+                        <h1>{pData['username']}</h1>
                     </div>
                     <div className="p-tb profile-edit">
                         <Link to="edit">
@@ -85,7 +103,7 @@ export const Profile = () => {
                 <div className="profile-stats">
                     <div className="info">
                         <div className="info-username">
-                            <h1>{pData.payload['username']}</h1>
+                            <h1>{pData['username']}</h1>
                         </div>
                         <div className="p-tb profile-edit">
                             <Link to="edit">
@@ -114,7 +132,7 @@ export const Profile = () => {
                         </div>
                     </div>
                     <div className="profile-bio">
-                        <p>{pData.payload['profileBio']}</p>
+                        <p>{pData['profileBio']}</p>
                     </div>
                 </div>
 
@@ -123,7 +141,7 @@ export const Profile = () => {
             </section>
 
             <section className="p-tb profile-bio-mobile">
-                <p>{pData.payload['profileBio']}</p>
+                <p>{pData['profileBio']}</p>
             </section>
             {/* <hr/> */}
 
@@ -146,8 +164,9 @@ export const Profile = () => {
             <section className="profile-uploads">
                 <hr/>
                 <div className="profile-uploads-flex">
-                    {pData.payload['uploadedPhotos'] !== undefined ? 
-                    (pData.payload['uploadedPhotos'].map((data, index) => <div> <img src={data} alt={data} key={index}/></div>)) 
+                    {pData['uploadedPhotos'] !== undefined ? 
+                    (pData['uploadedPhotos'].reverse().map((data, index) => <div> <img src={data} alt={data} key={index}/></div>))
+                    // (images.map((data, index) => <div>{data}</div>)) 
                     : 
                     null}
                 </div>
@@ -156,44 +175,54 @@ export const Profile = () => {
     )
 }
 
-// const group = (data) => {
-//     let trav = data.reverse();
-//     let temp = [];
-//     let hold = [];
-//     if(data.length === 1){
-//         temp.push(trav[0]);
-//         hold.push(temp);
-//     }  
-//     if(data.length === 2){
-//         temp.push(trav[0]);
-//         temp.push(trav[1]);
-//         hold.push(temp);
-//     } 
-//     else{
-//         let i = 0;
-//         while( i < trav.length){
-//             if(i - trav.length <= 2){
-//                 if(i - trav.length === 2){
-//                     // temp.push(trav[i]);
-//                     // temp.push(trav[i+1]);
-//                     hold.push([trav[i], trav[i+1]]);
-//                     i+=2;
-//                 }
-//                 else{
-//                     // temp.push()
-//                     hold.push([trav[i]]);
-//                     i++;
-//                 }
-//             }
-//             else{
-//                 // temp.push(trav[i]);
-//                 // temp.push(trav[i+1]);
-//                 // temp.push(trav[i+2]);
-//                 hold.push([trav[i], trav[i+1], trav[i+2]]);
-//                 i+=3;
-//             }
-//             temp = [];
-//         }
-//     }
-//     return hold;
-// }
+const group = (data) => {
+    let trav = data.reverse();
+    // let temp = [];
+    let buffer = [];
+    if(trav.length === 1){
+        let t = <div>
+            <img src={trav[0]} alt={trav[0]}/>
+        </div>
+        buffer.push(t);
+    }  
+    if(trav.length === 2){
+        let t = <div>
+            <img src={trav[0]} alt={trav[0]}/>
+            <img src={trav[0]} alt={trav[0]}/>
+        </div>
+        buffer.push(t);
+    } 
+    else{
+        let i = 0;
+        while( i < trav.length){
+            if(i - trav.length <= 2){
+                if(i - trav.length === 2){
+                    let t = <div>
+                        <img src={trav[i]} alt={trav[i]}/>
+                        <img src={trav[i +1]} alt={trav[i+1]}/>
+                    </div>
+                    buffer.push([t]);
+                    i+=2;
+                }
+                else{
+                    let t = <div>
+                        <img src={trav[i]} alt={trav[i]}/>
+                    </div>
+                    buffer.push(t);
+                    i++;
+                }
+            }
+            else{
+                let t = <div>
+                            <img src={trav[i]} alt={trav[i]}/>
+                            <img src={trav[i+1]} alt={trav[i+1]}/>
+                            <img src={trav[i+2]} alt={trav[i+2]}/>
+                        </div>
+                buffer.push(t);
+                i+=3;
+            }
+            // temp = [];
+        }
+    }
+    return buffer;
+}

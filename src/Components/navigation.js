@@ -1,6 +1,6 @@
-import React, { useState, useRef, useEffect }  from 'react';
+import React, { useState }  from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import { Button, Overlay, Popover } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 
 //Imported Functions
 import { convertBase64 } from '../helper/settings';
@@ -12,9 +12,9 @@ import { setImage, isUploaded, setUploadedImage } from '../redux/imageUpload';
 
 //Styling & Images
 import '../styling/navigation.scss';
-import { ReactComponent as Home } from '../svg/home.svg';
+// import { ReactComponent as Home } from '../svg/home.svg';
 import { ReactComponent as Upload } from '../svg/upload.svg';
-import { ReactComponent as LikesSVG } from '../svg/likes.svg';
+// import { ReactComponent as LikesSVG } from '../svg/likes.svg';
 import { ReactComponent as Profile} from '../svg/profile.svg';
 import { ReactComponent as Off} from '../svg/power-outline.svg';
 
@@ -46,12 +46,12 @@ export const Navigation = () => {
 
     return (
     <nav className="flex-c navigation">
-        <div className="flex-containers"></div>
-        <div className="flex-containers"> </div>
+        {/* <div className="flex-containers"></div> */}
+        {/* <div className="flex-containers"> </div> */}
         <div className="flex-se flex-containers">
-        <Link to="/home">
+        {/* <Link to="/home">
             <Home  fill="black" /> 
-        </Link>
+        </Link> */}
 
         <Button 
         variant="link" 
@@ -76,46 +76,45 @@ export const Navigation = () => {
         {/* <Link to="/likes">
             <Likes fill="black" />
         </Link> */}
-        <div>
+        {/* <div>
             <LikesSVG fill="black" onClick={() => LikesPopover()}/>
-        
-        </div>
+        </div> */}
 
         <Link to="/profile"> 
             <Profile fill="black" /> 
         </Link>
-            <Off fill="white" onClick={() => signOut()} />
+            <Off fill="black" onClick={() => signOut()} />
         </div>
     </nav>
     );
 }
 
-const LikesPopover = (e) => {
-    const [show, setShow] = useState(false);
-    const [target, setTarget] = useState(null);
-    const ref = useRef(null); 
+// const LikesPopover = (e) => {
+//     const [show, setShow] = useState(false);
+//     const [target, setTarget] = useState(null);
+//     const ref = useRef(null); 
 
-    useEffect(() => {
-        setShow(!show);
-        setTarget(e.target);
-        // eslint-disable-next-line
-    }, [show]);
+//     useEffect(() => {
+//         setShow(!show);
+//         setTarget(e.target);
+//         // eslint-disable-next-line
+//     }, [show]);
 
-    return(
-        <div ref={ref}>
-            <Overlay
-                show={show}
-                target={target}
-                placemen="bottom"
-                container={ref.current}
-                containerPadding={20}
-            >
-                <Popover id="popover-contained">
-                <Popover.Content>
-                    <strong>Holy guacamole!</strong> Check this info.
-                </Popover.Content>
-                </Popover>
-            </Overlay>
-        </div>
-    );
-}
+//     return(
+//         <div ref={ref}>
+//             <Overlay
+//                 show={show}
+//                 target={target}
+//                 placemen="bottom"
+//                 container={ref.current}
+//                 containerPadding={20}
+//             >
+//                 <Popover id="popover-contained">
+//                 <Popover.Content>
+//                     <strong>Holy guacamole!</strong> Check this info.
+//                 </Popover.Content>
+//                 </Popover>
+//             </Overlay>
+//         </div>
+//     );
+// }

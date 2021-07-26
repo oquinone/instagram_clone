@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import { Button, Navbar, Image, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+
+//Imported Functions
 import { updateUserInfo } from '../fetch/settings';
 import { change } from '../helper/settings';
+
+//Redux
 import { useSelector } from 'react-redux';
 
+//Styling & Images
 import '../styling/settings.scss';
 import '../styling/globals.scss';
 import { ReactComponent as Cancel } from '../svg/cancel.svg'
@@ -12,8 +17,8 @@ import { ReactComponent as Save } from '../svg/save.svg'
 import Slug from '../images/ucscsammy.jpeg';
 
 export const Settings = () => {
-    const { profilePhoto } = useSelector((state) => state.profile);
-    const [profilePic, setProfilePic] = useState(profilePhoto.payload);
+    const { profilePicture } = useSelector((state) => state.profile);
+    const [profilePic, setProfilePic] = useState(profilePicture['profilePicture']);
     const [bio, setBio] = useState("");
     const [username, setUsername] = useState("");
 

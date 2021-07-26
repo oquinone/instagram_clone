@@ -14,6 +14,7 @@ import { uploadNewImage } from './fetch/app';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { setImage, setUploadedImage } from './redux/imageUpload';
+import { setUpdateUser } from './redux/profile';
 
 const App = () => {
     const dispatch = useDispatch();
@@ -41,6 +42,7 @@ const App = () => {
         dispatch(setUploadedImage({}));
         setIsOpen(false);
         setIsLoading(false);
+        dispatch(setUpdateUser(true));
     }
     if(isLoading){
         return <div className="flex-c spinner">

@@ -1,5 +1,5 @@
 export const updateUserInfo = async (username, bio, profilePic) => {
-    const url = "http://localhost:5000/edit";
+    const url = "https://invulnerable-moliere-82505.herokuapp.com/edit";
     const options = {
         method: 'POST',
         headers: {

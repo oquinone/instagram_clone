@@ -1,5 +1,5 @@
 export const loginReq = async (email, password) => {
-    const url = "http://localhost:5000/login";
+    const url = "https://invulnerable-moliere-82505.herokuapp.com/login";
     const options = {
         method: 'POST',
         headers: {

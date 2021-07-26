@@ -1,5 +1,5 @@
 export const logout = async () => {
-    const url = `http://localhost:5000/logout`;
+    const url = `https://invulnerable-moliere-82505.herokuapp.com/logout`;
     const options = {
          method: 'GET',
          credentials: 'include'
