@@ -46,18 +46,11 @@ export const Navigation = () => {
 
     return (
     <nav className="flex-c navigation">
-        {/* <div className="flex-containers"></div> */}
-        {/* <div className="flex-containers"> </div> */}
-        <div className="flex-se flex-containers">
-        {/* <Link to="/home">
-            <Home  fill="black" /> 
-        </Link> */}
-
         <Button 
         variant="link" 
         size="lg" 
         type="file"
-        className="navigation-btn"> 
+        className="nav-btn"> 
             <label 
             htmlFor="navigation-input"
             >
@@ -73,48 +66,19 @@ export const Navigation = () => {
             onChange={e => onFileChange(e)} />
         </Button>
 
-        {/* <Link to="/likes">
-            <Likes fill="black" />
-        </Link> */}
-        {/* <div>
-            <LikesSVG fill="black" onClick={() => LikesPopover()}/>
-        </div> */}
-
-        <Link to="/profile"> 
+        <Link 
+        to="/profile" 
+        className="nav-btn"> 
             <Profile fill="black" /> 
         </Link>
-            <Off fill="black" onClick={() => signOut()} />
+
+        <div>
+            <Off 
+            fill="black" 
+            onClick={() => signOut()} 
+            className="nav-btn"/>
         </div>
     </nav>
     );
 }
 
-// const LikesPopover = (e) => {
-//     const [show, setShow] = useState(false);
-//     const [target, setTarget] = useState(null);
-//     const ref = useRef(null); 
-
-//     useEffect(() => {
-//         setShow(!show);
-//         setTarget(e.target);
-//         // eslint-disable-next-line
-//     }, [show]);
-
-//     return(
-//         <div ref={ref}>
-//             <Overlay
-//                 show={show}
-//                 target={target}
-//                 placemen="bottom"
-//                 container={ref.current}
-//                 containerPadding={20}
-//             >
-//                 <Popover id="popover-contained">
-//                 <Popover.Content>
-//                     <strong>Holy guacamole!</strong> Check this info.
-//                 </Popover.Content>
-//                 </Popover>
-//             </Overlay>
-//         </div>
-//     );
-// }
