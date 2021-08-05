@@ -22,9 +22,7 @@ import { setProfilePicture } from '../redux/profile';
 
 export const Profile = () => {
     const dispatch = useDispatch();
-    // const { updateUser,  } = useSelector((state) => state.profile);
     const [pData, setProfileData] = useState(null);
-    // const [images, setImages]  = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [isLoggedOut, setIsLoggedOut] = useState(false);
 
