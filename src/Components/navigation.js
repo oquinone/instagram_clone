@@ -46,14 +46,16 @@ export const Navigation = () => {
 
     return (
     <nav className="flex-c navigation">
+       
+            {/* <Upload fill="black"/> */}
+            
         <Button 
         variant="link" 
         size="lg" 
         type="file"
         className="nav-btn"> 
             <label 
-            htmlFor="navigation-input"
-            >
+            htmlFor="navigation-input">
                 <Upload fill="black"/>
             </label>
 
