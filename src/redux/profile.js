@@ -5,7 +5,8 @@ export const profileSlice = createSlice({
     initialState:{
         pData: {},
         updateUser: false,
-        profilePicture: ""
+        profilePicture: "",
+        selectedImage: -1
     },
     reducers:{
         setProfileData: (state, data) => {
@@ -16,8 +17,11 @@ export const profileSlice = createSlice({
         },
         setProfilePicture: (state, image) => {
             state.profilePicture = image;
+        },
+        setSelectedImage: (state, val) => {
+            state.selectedImage = val;
         }
     }
 });
-export const { setProfileData, setUpdateUser, setProfilePicture } = profileSlice.actions;
+export const { setProfileData, setUpdateUser, setProfilePicture, setSelectedImage } = profileSlice.actions;
 export default profileSlice.reducer;
