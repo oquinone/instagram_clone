@@ -11,25 +11,35 @@ import { ProfileUserInfo } from './profileUesrInfo';
 import { ProfileBioMobile } from './profileBioMobile';
 import { ProfileUploads } from './profileUploads';
 import { ProfileFollowersMobile } from './profileFollowersMobile';
+import { ImageModal } from './imageDisplay';
 
 // Styling & Images
 import '../styling/profile.scss';
 import '../styling/globals.scss';
 
 //Redux
-import { useDispatch } from 'react-redux';
-import { setProfilePicture } from '../redux/profile';
+import { useDispatch, useSelector } from 'react-redux';
+import { setProfilePicture, setSelectedImage } from '../redux/profile';
 
 export const Profile = () => {
     const dispatch = useDispatch();
+    const { selectedImage } = useSelector((state) => state.profile);
     const [pData, setProfileData] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [isLoggedOut, setIsLoggedOut] = useState(false);
+    const [openModal, setOpenModal] = useState(false);
 
     useEffect(() => {
         makeRequest();
         // eslint-disable-next-line
     }, [])
+
+    useEffect(() => {
+        if(selectedImage.payload !== -1 && selectedImage !== -1){
+            setOpenModal(true);
+            // console.log(pData['uploadedPhotos'][selectedImage.payload]);
+        }
+    }, [selectedImage])
 
     const makeRequest = async () => {
         const data = await getProfileData();
@@ -42,7 +52,11 @@ export const Profile = () => {
             dispatch(setProfilePicture(data['profilePicture']))
             setIsLoading(false);
         }
-        
+    }
+
+    const closeModal = () => {
+        setOpenModal(false);
+        dispatch(setSelectedImage(-1));
     }
 
     if(isLoggedOut){
@@ -59,6 +73,12 @@ export const Profile = () => {
 
     return (
         <div className = "profile">
+            <>
+                <ImageModal 
+                open={openModal}
+                close={closeModal}
+                image={pData['uploadedPhotos'][selectedImage.payload]}/>
+            </>
             <section className="profile-nav">
                 <Navigation/>
             </section>
