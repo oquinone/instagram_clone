@@ -4,12 +4,10 @@ import { Spinner } from 'react-bootstrap';
 
 import { Likes } from './Components/likes';
 import { Profile } from './Components/profile';
-// import { Feed } from './Components/feed';
 import { UploadFile } from './Components/modal';
 import { Settings } from './Components/settings';
 import { Login } from './Components/login';
 import { Signup } from './Components/signup';
-// import { Followers } from './Components/followers';
 import { uploadNewImage } from './fetch/app';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -18,7 +16,6 @@ import { setUpdateUser } from './redux/profile';
 
 const App = () => {
     const dispatch = useDispatch();
-    // const { _info } = useSelector((state) => state.signUpStore);
     const [isOpen, setIsOpen] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const { uploaded } = useSelector((state) => state.newUpload);
@@ -74,9 +71,6 @@ const App = () => {
                         <Route path="/edit" exact>
                             <Settings />
                         </Route>
-                        {/* <Route path="/followers" exact>
-                            <Followers />
-                        </Route> */}
                     </Switch>
                 </div>
         </Router>
