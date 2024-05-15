@@ -1,76 +1,94 @@
-import React, { useState } from 'react'
-import { Form, Button, Alert, Spinner } from 'react-bootstrap';
-import { Link, Redirect } from 'react-router-dom';
-
-// Imported Functions
-import { loginReq } from '../fetch/login';
-
-//Styling & Images
-import '../styling/login.scss';
-import '../styling/globals.scss';
-import Logo from '../images/logo.png';
-
-//Redux
-import { useSelector } from 'react-redux';
-// import { setUsername } from '../redux/signup';
+import React, { useState } from "react";
+import { Form, Button, Alert, Spinner } from "react-bootstrap";
+import { Link, Redirect } from "react-router-dom";
+import { loginAPI, getLoginDataAPI } from "../apis/login";
+import { useInfoStore } from "../zucstand/store";
+import Cookies from "js-cookie";
+import "../styling/login.scss";
+import "../styling/globals.scss";
+import Logo from "../images/logo.png";
 
 export const Login = () => {
-    // const dispatch = useDispatch();
-    const [email, setEmail] = useState("");
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [isLoading, setIsLoading] = useState(false);
-    const [password, setPassword] = useState("");
-    const { signUpSuccessfull } = useSelector((state) => state.signUpStore);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
-    // Checks if Credentials are Correct
-    const submit = async () => {
-        const loginData = await loginReq(email, password);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const setStoreUserName = useInfoStore((state) => state.setUserName);
+  const { userSignUp } = useInfoStore();
 
-        if(loginData['success']){
-            setIsLoading(true);
-            // dispatch(setUsername(loginData['username']));
-            setIsLoggedIn(true);
-        }
+  // Checks if Credentials are Correct
+  const submit = async () => {
+    const res = await loginAPI({ username, password });
+    const { token = "" } = res || {};
+    if (!token) return;
+    Cookies.set("token", token, { expires: 7, secure: true });
+    const data = await getLoginDataAPI({ username, token });
+
+    if (data) {
+      setStoreUserName(username);
+      const storage = { id: data.id, username: data.username };
+      localStorage.setItem("data", JSON.stringify(storage));
+      setIsLoading(true);
+      setIsLoggedIn(true);
     }
+  };
 
-    if(isLoggedIn){
-        return(
-            <Redirect to="/profile" />
-        );
-    }
+  if (isLoggedIn) {
+    return <Redirect to="/profile" />;
+  }
 
-    if(isLoading){
-        return <div className="flex-c spinner">
-                <Spinner animation="border" variant="primary"/>
-            </div>
-    }
-
+  if (isLoading) {
     return (
-        <div className="login-container">
-            <section className="flex-c login">
-                <div className="login-header">
-                    <img src={Logo} alt={Logo} />
-                    {signUpSuccessfull ? <Alert variant="success"> Use Credentials to Login</Alert> : null}
-                </div>
-                <div className="login-form">
-                    <Form>
-                        <Form.Group controlId="formGroupEmail">
-                            <Form.Control type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)}/>
-                        </Form.Group>
-                        <Form.Group controlId="formGroupPassword">
-                            <Form.Control type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)}/>
-                        </Form.Group>
-                    </Form> 
-                </div>
-                <div className="login-btn">
-                    <Button variant="primary" onClick={() => submit()}>Login</Button>
-                </div>
-                <div className="login-signup">
-                    <span>
-                        <p>Don't Have An Account?  <Link to="/signup"><em> Sign up</em></Link></p>
-                    </span>
-                </div>
-            </section>
-        </div>
+      <div className="flex-c spinner">
+        <Spinner animation="border" variant="primary" />
+      </div>
     );
-}
+  }
+
+  return (
+    <div className="login-container">
+      <section className="flex-c login">
+        <div className="login-header">
+          <img src={Logo} alt={Logo} />
+          {userSignUp ? (
+            <Alert variant="success"> Use Credentials to Login</Alert>
+          ) : null}
+        </div>
+        <div className="login-form">
+          <Form>
+            <Form.Group controlId="formGroupEmail">
+              <Form.Control
+                type="email"
+                placeholder="Email"
+                onChange={(e) => setUsername(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group controlId="formGroupPassword">
+              <Form.Control
+                type="password"
+                placeholder="Password"
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </Form.Group>
+          </Form>
+        </div>
+        <div className="login-btn">
+          <Button variant="primary" onClick={() => submit()}>
+            Login
+          </Button>
+        </div>
+        <div className="login-signup">
+          <span>
+            <p>
+              Don't Have An Account?{" "}
+              <Link to="/signup">
+                <em> Sign up</em>
+              </Link>
+            </p>
+          </span>
+        </div>
+      </section>
+    </div>
+  );
+};

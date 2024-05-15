@@ -1,108 +1,108 @@
-import React, { useState, useEffect } from 'react';
-import { Spinner } from 'react-bootstrap';
-import { Redirect } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { Spinner } from "react-bootstrap";
+// import { Redirect } from "react-router-dom";
 
 //Imported Functions
-import { Navigation } from './navigation';
-import { getProfileData } from '../fetch/profile';
+import { Navigation } from "./navigation";
+import { getProfileDataFromUser } from "../apis/profile";
 
 //Components
-import { ProfileUserInfo } from './profileUesrInfo';
-import { ProfileBioMobile } from './profileBioMobile';
-import { ProfileUploads } from './profileUploads';
-import { ProfileFollowersMobile } from './profileFollowersMobile';
-import { ImageModal } from './imageDisplay';
+import { ProfileUserInfo } from "./profileUesrInfo";
+import { ProfileBioMobile } from "./profileBioMobile";
+import { ProfileUploads } from "./profileUploads";
+import { ProfileFollowersMobile } from "./profileFollowersMobile";
+import { ImageModal } from "./imageDisplay";
 
 // Styling & Images
-import '../styling/profile.scss';
-import '../styling/globals.scss';
+import "../styling/profile.scss";
+import "../styling/globals.scss";
 
-//Redux
-import { useDispatch, useSelector } from 'react-redux';
-import { setProfilePicture, setSelectedImage } from '../redux/profile';
+//Zustand
+import { useInfoStore } from "../zucstand/store";
+
+import Cookies from "js-cookie";
 
 export const Profile = () => {
-    const dispatch = useDispatch();
-    const { selectedImage } = useSelector((state) => state.profile);
-    const [pData, setProfileData] = useState(null);
-    const [isLoading, setIsLoading] = useState(true);
-    const [isLoggedOut, setIsLoggedOut] = useState(false);
-    const [openModal, setOpenModal] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  //   const [isLoggedOut, setIsLoggedOut] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
 
-    useEffect(() => {
-        makeRequest();
-        // eslint-disable-next-line
-    }, [])
+  //Zustand
+  const setInfo = useInfoStore((state) => state.setInfo);
+  const { bio, username, profileImage, setProfileImage, setUploadedImages } =
+    useInfoStore();
 
-    useEffect(() => {
-        if(selectedImage.payload !== -1 && selectedImage !== -1){
-            setOpenModal(true);
-            // console.log(pData['uploadedPhotos'][selectedImage.payload]);
-        }
-    }, [selectedImage])
+  useEffect(() => {
+    makeRequest();
+    // eslint-disable-next-line
+  }, []);
 
-    const makeRequest = async () => {
-        const data = await getProfileData();
+  //   useEffect(() => {
+  //     if (selectedImage.payload !== -1 && selectedImage !== -1) {
+  //       setOpenModal(true);
+  //       // console.log(pData['uploadedPhotos'][selectedImage.payload]);
+  //     }
+  //   }, [selectedImage]);
 
-        if(data === "Not Auth"){
-            setIsLoggedOut(true);
-        }
-        else{
-            setProfileData(data);
-            dispatch(setProfilePicture(data['profilePicture']))
-            setIsLoading(false);
-        }
+  const makeRequest = async () => {
+    const token = Cookies.get("token");
+    const storage = JSON.parse(localStorage.getItem("data"));
+    const getUserName = username || storage.username || "";
+    const res = await getProfileDataFromUser({ username: getUserName, token });
+    if (res) {
+      const data = res;
+      setInfo({ bio: data.bio, username: data.username, id: data.id });
+      // setBio(data.bio);
+      setProfileImage(data.profileImage);
+      const images =
+        data.images !== null
+          ? data.uploadedImages.map((item) => {
+              return item.image;
+            })
+          : [];
+      setUploadedImages(images);
+      setIsLoading(false);
     }
+  };
 
-    const closeModal = () => {
-        setOpenModal(false);
-        dispatch(setSelectedImage(-1));
-    }
-
-    if(isLoggedOut){
-        return(
-            <Redirect to="/" />
-        );
-    }
-
-    if(isLoading){
-        return <div className="flex-c spinner">
-                <Spinner animation="border" variant="primary"/>
-            </div>
-    }
-
+  if (isLoading) {
     return (
-        <div className = "profile">
-            <>
-                <ImageModal 
-                open={openModal}
-                close={closeModal}
-                image={pData['uploadedPhotos'][selectedImage.payload]}/>
-            </>
-            <section className="profile-nav">
-                <Navigation/>
-            </section>
-            <hr/>
+      <div className="flex-c spinner">
+        <Spinner animation="border" variant="primary" />
+      </div>
+    );
+  }
 
-            <>
-                <ProfileUserInfo 
-                profilePicture={pData['profilePicture']} 
-                username={pData['username']}
-                bio={pData['profileBio']}
-                />
-            </>
+  const closeModal = () => {
+    setOpenModal(false);
+    // dispatch(setSelectedImage(-1));
+  };
 
-            <>
-                <ProfileBioMobile bio={pData['profileBio']}/>
-            </>
+  const reloadProfile = async () => {
+    setIsLoading(true);
+    await makeRequest();
+  };
 
-            <>
-                <ProfileFollowersMobile />
-            </>
+  return (
+    <div className="profile">
+      <ImageModal open={openModal} close={closeModal} />
 
-            <>
-                <ProfileUploads images={pData['uploadedPhotos']} />
-            </>
-        </div>
-    )
-}
+      <section className="profile-nav">
+        <Navigation reloadProfile={reloadProfile} />
+      </section>
+      <hr />
+
+      <ProfileUserInfo
+        username={username}
+        bio={bio}
+        profilePicture={profileImage}
+      />
+
+      <ProfileBioMobile bio={bio} />
+
+      <ProfileFollowersMobile />
+
+      <ProfileUploads />
+    </div>
+  );
+};
