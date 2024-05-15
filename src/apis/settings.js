@@ -33,12 +33,17 @@ export const updateSettings = async (info) => {
   }
 };
 
-export const updateAllSettings = async (info) => {
+export const updateAllSettingsAPI = async (info, token) => {
   try {
     const response = await axios.put(
       "http://localhost:8080/info/updateAllBasicInfo",
       {
         ...info,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
       }
     );
 
