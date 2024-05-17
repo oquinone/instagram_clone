@@ -47,6 +47,6 @@ export const useImageUploadState = create((set) => ({
 export const useSignUpStore = create((set) => ({
   userSignUp: false,
 
-  setUserSignUp: (newImage) => set((state) => ({ image: newImage })),
+  setUserSignUp: (signup) => set((state) => ({ userSignUp: signup })),
   resetSignUpStore: () => set((state) => ({ userSignUp: false })),
 }));
