@@ -2,32 +2,33 @@ import React, { useState } from "react";
 import { Form, Button, Alert, Spinner } from "react-bootstrap";
 import { Link, Redirect } from "react-router-dom";
 import { loginAPI, getLoginDataAPI } from "../apis/login";
-import { useInfoStore } from "../zucstand/store";
+import { useSignUpStore } from "../zucstand/store";
 import Cookies from "js-cookie";
 import "../styling/login.scss";
 import "../styling/globals.scss";
 import Logo from "../images/logo.png";
 
 export const Login = () => {
-  const [username, setUsername] = useState("");
+  const [email, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const setStoreUserName = useInfoStore((state) => state.setUserName);
-  const { userSignUp } = useInfoStore();
+  const { userSignUp } = useSignUpStore();
 
   // Checks if Credentials are Correct
   const submit = async () => {
-    const res = await loginAPI({ username, password });
+    const res = await loginAPI({ email, password });
     const { token = "" } = res || {};
     if (!token) return;
     Cookies.set("token", token, { expires: 7, secure: true });
-    const data = await getLoginDataAPI({ username, token });
+    const data = await getLoginDataAPI({ email, token });
 
     if (data) {
-      setStoreUserName(username);
-      const storage = { id: data.id, username: data.username };
+      const storage = {
+        id: data.id,
+        email: data.email,
+      };
       localStorage.setItem("data", JSON.stringify(storage));
       setIsLoading(true);
       setIsLoggedIn(true);

@@ -1,32 +1,28 @@
 import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { Form, Button } from "react-bootstrap";
-
 import "../styling/login.scss";
 import "../styling/globals.scss";
 import Logo from "../images/logo.png";
-
-// API
 import { signUpUserAPI } from "../apis/signup";
 import { addNewUser } from "../apis/profile";
-
-//Zustand
 import { useSignUpStore } from "../zucstand/store";
 
 export const Signup = () => {
   const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  // const [email, setEmail] = useState("");
   // const [password2, setPassword2] = useState("");
   const [signUp, setSignUp] = useState(false);
   const { setUserSignUp } = useSignUpStore();
 
   const submit = async () => {
-    const data = await signUpUserAPI({ username, password });
+    const data = await signUpUserAPI({ email, password });
     const { token = "" } = data;
     const res = await addNewUser(
       {
+        email,
         username,
         bio: "Welcome to my new Profile",
         profileImage: "",
@@ -59,13 +55,13 @@ export const Signup = () => {
                 onChange={(e) => setUsername(e.target.value)}
               />
             </Form.Group>
-            {/* <Form.Group controlId="emailSignUp">
+            <Form.Group controlId="emailSignUp">
               <Form.Control
                 type="email"
                 placeholder="Email"
                 onChange={(e) => setEmail(e.target.value)}
               />
-            </Form.Group> */}
+            </Form.Group>
             <Form.Group controlId="passwordSignUp">
               <Form.Control
                 type="password"
