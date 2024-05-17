@@ -16,11 +16,11 @@ export const loginAPI = async (data) => {
 };
 
 // axios.defaults.withCredentials = true;
-export const getLoginDataAPI = async ({ username, token }) => {
+export const getLoginDataAPI = async ({ email, token }) => {
   try {
     const response = await axios.get(`http://localhost:8080/info/findUser`, {
       params: {
-        username,
+        email,
       },
       headers: {
         Authorization: `Bearer ${token}`,

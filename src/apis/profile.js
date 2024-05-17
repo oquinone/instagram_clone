@@ -15,11 +15,11 @@ export const getProfileData = async ({ token }) => {
   }
 };
 
-export const getProfileDataFromUser = async ({ username, token }) => {
+export const getProfileDataFromUser = async ({ email, token }) => {
   try {
     const response = await axios.get("http://localhost:8080/info/findUser", {
       params: {
-        username,
+        email,
       },
       headers: {
         Authorization: `Bearer ${token}`,
