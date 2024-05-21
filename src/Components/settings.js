@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Navbar, Image, Form, Spinner } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { updateAllSettingsAPI } from "../apis/settings";
 import { getLoginDataAPI } from "../apis/login";
 import { change } from "../helper/settings";
@@ -11,7 +11,6 @@ import "../styling/globals.scss";
 import { ReactComponent as Cancel } from "../svg/cancel.svg";
 import { ReactComponent as Save } from "../svg/save.svg";
 import Slug from "../images/ucscsammy.jpeg";
-import { Redirect } from "react-router-dom";
 
 export const Settings = () => {
   const storeProfileImage = useInfoStore((state) => state.profileImage);
@@ -24,6 +23,7 @@ export const Settings = () => {
   const [getId, setCurrentId] = useState(id);
   const [done, setDone] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isToken, setIsToken] = useState(true);
 
   // select image to upload
   const changeProfileImage = async (e) => {
@@ -62,6 +62,13 @@ export const Settings = () => {
       setIsLoading(false);
     }
 
+    const token = Cookies.get("token");
+
+    if (!token) {
+      setIsToken(false);
+      return;
+    }
+
     if (!username) {
       setIsLoading(true);
       await fetchData();
@@ -69,16 +76,16 @@ export const Settings = () => {
     // eslint-disable-next-line
   }, []);
 
-  // if (isLoading && username) {
-  //   setIsLoading(false);
-  // }
-
   if (isLoading) {
     return (
       <div className="flex-c spinner">
         <Spinner animation="border" variant="primary" />
       </div>
     );
+  }
+
+  if (!isToken) {
+    return <Redirect to="/" />;
   }
 
   if (done) {

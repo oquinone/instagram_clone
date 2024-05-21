@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Redirect } from "react-router-dom";
 import { Spinner } from "react-bootstrap";
 import { Navigation } from "./navigation";
 import { getProfileDataFromUser } from "../apis/profile";
@@ -16,6 +17,7 @@ export const Profile = () => {
   const [isLoading, setIsLoading] = useState(true);
   //   const [isLoggedOut, setIsLoggedOut] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [isToken, setIsToken] = useState(true);
   const setInfo = useInfoStore((state) => state.setInfo);
   const { bio, username, profileImage, setProfileImage, setUploadedImages } =
     useInfoStore();
@@ -34,6 +36,11 @@ export const Profile = () => {
 
   const makeRequest = async () => {
     const token = Cookies.get("token");
+    if (!token) {
+      setIsToken(false);
+      setIsLoading(false);
+      return;
+    }
     const storage = JSON.parse(localStorage.getItem("data"));
     const getEmail = storage.email || "";
     const res = await getProfileDataFromUser({ email: getEmail, token });
@@ -57,6 +64,10 @@ export const Profile = () => {
         <Spinner animation="border" variant="primary" />
       </div>
     );
+  }
+
+  if (!isToken) {
+    return <Redirect to="/" />;
   }
 
   const closeModal = () => {

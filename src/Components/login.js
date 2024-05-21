@@ -11,16 +11,20 @@ import Logo from "../images/logo.png";
 export const Login = () => {
   const [email, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [invalid, setInvalid] = useState(false);
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { userSignUp } = useSignUpStore();
 
-  // Checks if Credentials are Correct
   const submit = async () => {
     const res = await loginAPI({ email, password });
     const { token = "" } = res || {};
-    if (!token) return;
+    if (!token) {
+      setInvalid(true);
+      setTimeout(resetInvalid, 3000);
+      return;
+    }
     Cookies.set("token", token, { expires: 7, secure: true });
     const data = await getLoginDataAPI({ email, token });
 
@@ -32,8 +36,11 @@ export const Login = () => {
       localStorage.setItem("data", JSON.stringify(storage));
       setIsLoading(true);
       setIsLoggedIn(true);
+      setInvalid(false);
     }
   };
+
+  const resetInvalid = () => setInvalid(false);
 
   if (isLoggedIn) {
     return <Redirect to="/profile" />;
@@ -54,6 +61,9 @@ export const Login = () => {
           <img src={Logo} alt={Logo} />
           {userSignUp ? (
             <Alert variant="success"> Use Credentials to Login</Alert>
+          ) : null}
+          {invalid ? (
+            <Alert variant="success">Invalid Login Credentials</Alert>
           ) : null}
         </div>
         <div className="login-form">

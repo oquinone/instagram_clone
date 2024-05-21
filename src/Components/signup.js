@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, Redirect } from "react-router-dom";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Alert } from "react-bootstrap";
 import "../styling/login.scss";
 import "../styling/globals.scss";
 import Logo from "../images/logo.png";
@@ -12,28 +12,41 @@ export const Signup = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const [alreadyExists, setUpAlreadyExists] = useState(false);
   // const [password2, setPassword2] = useState("");
   const [signUp, setSignUp] = useState(false);
   const { setUserSignUp } = useSignUpStore();
 
   const submit = async () => {
-    const data = await signUpUserAPI({ email, password });
-    const { token = "" } = data;
-    const res = await addNewUser(
-      {
-        email,
-        username,
-        bio: "Welcome to my new Profile",
-        profileImage: "",
-      },
-      token
-    );
-
-    if (res) {
-      setUserSignUp(true);
-      setSignUp(true);
+    if (!email && !password) {
+      alert("Must enter email and password");
+      return;
     }
+    const data = await signUpUserAPI({ email, password });
+    if (!data) {
+      setUpAlreadyExists(true);
+      setTimeout(resetAlreadyExists, 5000);
+    } else {
+      const { token = "" } = data;
+      const res = await addNewUser(
+        {
+          email,
+          username,
+          bio: "Welcome to my new Profile",
+          profileImage: "",
+        },
+        token
+      );
+
+      if (res) {
+        setUserSignUp(true);
+        setSignUp(true);
+      }
+    }
+  };
+
+  const resetAlreadyExists = () => {
+    setUpAlreadyExists(false);
   };
 
   if (signUp) {
@@ -46,7 +59,9 @@ export const Signup = () => {
           <img src={Logo} alt={Logo} />
         </div>
         <div className="login-form">
-          {/* {(displayError) ? (<Alert variant="danger">{errorMsg}</Alert>) : null} */}
+          {alreadyExists ? (
+            <Alert variant="danger">Email Already Exists</Alert>
+          ) : null}
           <Form>
             <Form.Group controlId="usernameSignUp">
               <Form.Control
