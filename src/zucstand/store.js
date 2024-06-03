@@ -33,6 +33,7 @@ export const useImageUploadState = create((set) => ({
   uploadedImage: null,
   uploaded: false,
   profileImage: "",
+  selectedImage: -1,
 
   setImage: (newImage) => set((state) => ({ image: newImage })),
   setImageName: (newImageName) => set((state) => ({ imageName: newImageName })),
@@ -41,6 +42,8 @@ export const useImageUploadState = create((set) => ({
   isUploaded: (isUploaded) => set((state) => ({ uploaded: isUploaded })),
   setProfileImage: (newProfImage) =>
     set((state) => ({ profileImage: newProfImage })),
+  setSelectedImage: (newSelectedImage) =>
+    set((state) => ({ selectedImage: newSelectedImage })),
 }));
 
 // sign up store
