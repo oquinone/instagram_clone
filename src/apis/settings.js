@@ -1,30 +1,13 @@
-// export const updateUserInfo = async (username, bio, profilePic) => {
-//   const url = "https://invulnerable-moliere-82505.herokuapp.com/edit";
-//   const options = {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//       Accept: "appliation.josn",
-//     },
-//     body: JSON.stringify({
-//       username: username,
-//       bio: bio,
-//       image: profilePic,
-//     }),
-//     credentials: "include",
-//   };
-//   await fetch(url, options);
-//   // const dataJSON = await data.json();
-//   return;
-// };
-
 import axios from "axios";
 
 export const updateSettings = async (info) => {
   try {
-    const response = await axios.put("http://localhost:8080/info/update", {
-      ...info,
-    });
+    const response = await axios.put(
+      "http://instacloneapi-env.eba-dsivkvr7.us-east-2.elasticbeanstalk.com/info/update",
+      {
+        ...info,
+      }
+    );
     return response.data;
     // console.log(response);
   } catch (error) {
@@ -36,7 +19,7 @@ export const updateSettings = async (info) => {
 export const updateAllSettingsAPI = async (info, token) => {
   try {
     const response = await axios.put(
-      "http://localhost:8080/info/updateAllBasicInfo",
+      "http://instacloneapi-env.eba-dsivkvr7.us-east-2.elasticbeanstalk.com/info/updateAllBasicInfo",
       {
         ...info,
       },

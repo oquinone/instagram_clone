@@ -3,7 +3,7 @@ import axios from "axios";
 export const uploadNewImageApi = async (data, token) => {
   try {
     const response = await axios.post(
-      "http://localhost:8080/info/upload",
+      "http://instacloneapi-env.eba-dsivkvr7.us-east-2.elasticbeanstalk.com/info/upload",
       {
         ...data,
       },
@@ -24,7 +24,7 @@ export const uploadNewImageApi = async (data, token) => {
 export const uploadNewImageToProfileApi = async (data, token) => {
   try {
     const response = await axios.post(
-      "http://localhost:8080/info/userUploadedImagesB64",
+      "http://instacloneapi-env.eba-dsivkvr7.us-east-2.elasticbeanstalk.com/info/userUploadedImagesB64",
       {
         id: data.id,
         image: data.image,
