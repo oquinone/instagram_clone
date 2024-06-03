@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Redirect } from "react-router-dom";
 import { Spinner } from "react-bootstrap";
 import { Navigation } from "./navigation";
-import { getProfileDataFromUser } from "../apis/profile";
+import { getProfileDataFromUser, deleteUserApi } from "../apis/profile";
 import { ProfileUserInfo } from "./profileUesrInfo";
 import { ProfileBioMobile } from "./profileBioMobile";
 import { ProfileUploads } from "./profileUploads";
@@ -10,7 +10,7 @@ import { ProfileFollowersMobile } from "./profileFollowersMobile";
 import { ImageModal } from "./imageDisplay";
 import "../styling/profile.scss";
 import "../styling/globals.scss";
-import { useInfoStore } from "../zucstand/store";
+import { useInfoStore, useImageUploadState } from "../zucstand/store";
 import Cookies from "js-cookie";
 
 export const Profile = () => {
@@ -19,20 +19,28 @@ export const Profile = () => {
   const [openModal, setOpenModal] = useState(false);
   const [isToken, setIsToken] = useState(true);
   const setInfo = useInfoStore((state) => state.setInfo);
-  const { bio, username, profileImage, setProfileImage, setUploadedImages } =
-    useInfoStore();
+  const {
+    bio,
+    username,
+    profileImage,
+    setProfileImage,
+    setUploadedImages,
+    uploadedImages,
+    id,
+  } = useInfoStore();
+  const { selectedImage, setSelectedImage } = useImageUploadState();
 
   useEffect(() => {
     makeRequest();
     // eslint-disable-next-line
   }, []);
 
-  //   useEffect(() => {
-  //     if (selectedImage.payload !== -1 && selectedImage !== -1) {
-  //       setOpenModal(true);
-  //       // console.log(pData['uploadedPhotos'][selectedImage.payload]);
-  //     }
-  //   }, [selectedImage]);
+  useEffect(() => {
+    if (selectedImage !== -1 && selectedImage !== -1) {
+      setOpenModal(true);
+      // console.log(pData['uploadedPhotos'][selectedImage.payload]);
+    }
+  }, [selectedImage]);
 
   const makeRequest = async () => {
     const token = Cookies.get("token");
@@ -71,8 +79,18 @@ export const Profile = () => {
   }
 
   const closeModal = () => {
+    setSelectedImage(-1);
     setOpenModal(false);
-    // dispatch(setSelectedImage(-1));
+  };
+
+  const removeImage = async () => {
+    setIsLoading(true);
+    const token = Cookies.get("token");
+    setOpenModal(false);
+    setSelectedImage(-1);
+    await deleteUserApi(id, selectedImage, token);
+    await makeRequest();
+    setIsLoading(false);
   };
 
   const reloadProfile = async () => {
@@ -82,7 +100,12 @@ export const Profile = () => {
 
   return (
     <div className="profile">
-      <ImageModal open={openModal} close={closeModal} />
+      <ImageModal
+        open={openModal}
+        close={closeModal}
+        remove={removeImage}
+        image={uploadedImages[selectedImage]}
+      />
 
       <section className="profile-nav">
         <Navigation reloadProfile={reloadProfile} />

@@ -6,11 +6,12 @@ import img_3 from "../images/nature_3.jpeg";
 import img_4 from "../images/nature_4.jpeg";
 
 //zucstand
-import { useInfoStore } from "../zucstand/store";
+import { useInfoStore, useImageUploadState } from "../zucstand/store";
 
 export const ProfileUploads = () => {
   const uploadedImages = useInfoStore((state) => state.uploadedImages);
   const imgs = [img_1, img_2, img_3, img_4];
+  const { setSelectedImage } = useImageUploadState();
 
   return (
     <section className="profile-uploads">
@@ -18,18 +19,12 @@ export const ProfileUploads = () => {
       <div className="profile-uploads-flex">
         {uploadedImages !== undefined
           ? uploadedImages.map((data, index) => (
-              <div
-                key={index}
-                // onClick={() => dispatch(setSelectedImage(index))}
-              >
+              <div key={index} onClick={() => setSelectedImage(index)}>
                 <img src={data} alt={data} />
               </div>
             ))
           : imgs.map((data, index) => (
-              <div
-                key={index}
-                // onClick={() => dispatch(setSelectedImage(index))}
-              >
+              <div key={index} onClick={() => setSelectedImage(index)}>
                 <img src={data} alt={data} />
               </div>
             ))}
