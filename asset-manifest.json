@@ -1,26 +1,23 @@
 {
   "files": {
-    "main.css": "/instagram_clone/static/css/main.6444a9dc.chunk.css",
-    "main.js": "/instagram_clone/static/js/main.3ee3a8ab.chunk.js",
-    "main.js.map": "/instagram_clone/static/js/main.3ee3a8ab.chunk.js.map",
-    "runtime-main.js": "/instagram_clone/static/js/runtime-main.757330a5.js",
-    "runtime-main.js.map": "/instagram_clone/static/js/runtime-main.757330a5.js.map",
-    "static/js/2.aceedd1b.chunk.js": "/instagram_clone/static/js/2.aceedd1b.chunk.js",
-    "static/js/2.aceedd1b.chunk.js.map": "/instagram_clone/static/js/2.aceedd1b.chunk.js.map",
+    "main.css": "/instagram_clone/static/css/main.4490adbe.css",
+    "main.js": "/instagram_clone/static/js/main.10fc9c43.js",
+    "static/media/nature_3.jpeg": "/instagram_clone/static/media/nature_3.cb6c8ed0000a473ffd49.jpeg",
+    "static/media/nature_2.jpeg": "/instagram_clone/static/media/nature_2.e6e4f8a4ba3ef464e822.jpeg",
+    "static/media/nature_1.jpeg": "/instagram_clone/static/media/nature_1.69aba6e3217ce267b64d.jpeg",
+    "static/media/nature_4.jpeg": "/instagram_clone/static/media/nature_4.8275fc4e0339602ca9a3.jpeg",
+    "static/media/ucscsammy.jpeg": "/instagram_clone/static/media/ucscsammy.9c0f0db57bb33cbb480f.jpeg",
     "index.html": "/instagram_clone/index.html",
-    "static/css/main.6444a9dc.chunk.css.map": "/instagram_clone/static/css/main.6444a9dc.chunk.css.map",
-    "static/js/2.aceedd1b.chunk.js.LICENSE.txt": "/instagram_clone/static/js/2.aceedd1b.chunk.js.LICENSE.txt",
-    "static/media/cancel.599088c5.svg": "/instagram_clone/static/media/cancel.599088c5.svg",
-    "static/media/power-outline.451aec0b.svg": "/instagram_clone/static/media/power-outline.451aec0b.svg",
-    "static/media/profile.ff63e02d.svg": "/instagram_clone/static/media/profile.ff63e02d.svg",
-    "static/media/save.166dd8cc.svg": "/instagram_clone/static/media/save.166dd8cc.svg",
-    "static/media/ucscsammy.9c0f0db5.jpeg": "/instagram_clone/static/media/ucscsammy.9c0f0db5.jpeg",
-    "static/media/upload.7a1f8b1d.svg": "/instagram_clone/static/media/upload.7a1f8b1d.svg"
+    "static/media/upload.svg": "/instagram_clone/static/media/upload.7a1f8b1d5e764eea1da280a1cfe47de1.svg",
+    "static/media/cancel.svg": "/instagram_clone/static/media/cancel.599088c5daf2192f4cb48e916606dd30.svg",
+    "static/media/profile.svg": "/instagram_clone/static/media/profile.ff63e02de5d80ea417bbef14f2246abc.svg",
+    "static/media/save.svg": "/instagram_clone/static/media/save.166dd8cc0ef1669a8cffd89c5ad9d1da.svg",
+    "static/media/power-outline.svg": "/instagram_clone/static/media/power-outline.451aec0b4a1487728acb84e7600cba75.svg",
+    "main.4490adbe.css.map": "/instagram_clone/static/css/main.4490adbe.css.map",
+    "main.10fc9c43.js.map": "/instagram_clone/static/js/main.10fc9c43.js.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.757330a5.js",
-    "static/js/2.aceedd1b.chunk.js",
-    "static/css/main.6444a9dc.chunk.css",
-    "static/js/main.3ee3a8ab.chunk.js"
+    "static/css/main.4490adbe.css",
+    "static/js/main.10fc9c43.js"
   ]
 }
