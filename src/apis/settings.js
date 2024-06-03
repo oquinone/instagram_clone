@@ -3,7 +3,7 @@ import axios from "axios";
 export const updateSettings = async (info) => {
   try {
     const response = await axios.put(
-      "http://instacloneapi-env.eba-dsivkvr7.us-east-2.elasticbeanstalk.com/info/update",
+      "https://afternoon-lake-11970-27bd8a5aced0.herokuapp.com/info/update",
       {
         ...info,
       }
@@ -19,7 +19,7 @@ export const updateSettings = async (info) => {
 export const updateAllSettingsAPI = async (info, token) => {
   try {
     const response = await axios.put(
-      "http://instacloneapi-env.eba-dsivkvr7.us-east-2.elasticbeanstalk.com/info/updateAllBasicInfo",
+      "https://afternoon-lake-11970-27bd8a5aced0.herokuapp.com/info/updateAllBasicInfo",
       {
         ...info,
       },

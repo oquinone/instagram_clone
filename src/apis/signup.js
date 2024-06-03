@@ -3,7 +3,7 @@ import axios from "axios";
 export const signUpUserAPI = async (data) => {
   try {
     const response = await axios.post(
-      "http://instacloneapi-env.eba-dsivkvr7.us-east-2.elasticbeanstalk.com/api/auth/signup",
+      "https://afternoon-lake-11970-27bd8a5aced0.herokuapp.com/api/auth/signup",
       {
         ...data,
       }

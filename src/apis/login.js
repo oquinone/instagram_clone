@@ -3,7 +3,7 @@ import axios from "axios";
 export const loginAPI = async (data) => {
   try {
     const response = await axios.post(
-      "http://instacloneapi-env.eba-dsivkvr7.us-east-2.elasticbeanstalk.com/api/auth/authenticate",
+      "https://afternoon-lake-11970-27bd8a5aced0.herokuapp.com/api/auth/authenticate",
       {
         ...data,
       }
@@ -19,7 +19,7 @@ export const loginAPI = async (data) => {
 export const getLoginDataAPI = async ({ email, token }) => {
   try {
     const response = await axios.get(
-      `http://instacloneapi-env.eba-dsivkvr7.us-east-2.elasticbeanstalk.com/info/findUser`,
+      `https://afternoon-lake-11970-27bd8a5aced0.herokuapp.com/info/findUser`,
       {
         params: {
           email,
