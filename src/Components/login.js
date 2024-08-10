@@ -49,7 +49,10 @@ export const Login = () => {
   if (isLoading) {
     return (
       <div className="flex-c spinner">
-        <Spinner animation="border" variant="primary" />
+        <p>
+          Server is starting, this might take a few minutes{" "}
+          <Spinner animation="border" variant="primary" />
+        </p>
       </div>
     );
   }
