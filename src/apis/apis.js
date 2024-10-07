@@ -37,3 +37,20 @@ export const PutAPICall = async (props) => {
     console.error(error);
   }
 };
+
+export const removeImageApi = async (props) => {
+  const { url, id, idx } = props;
+  try {
+    const response = await axios.delete(url, {
+      params: {
+        id,
+        idx,
+      },
+    });
+    return response.data;
+    // console.log(response);
+  } catch (error) {
+    // Handle error
+    console.error(error);
+  }
+};

@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
 import { useInfoStore, useImageUploadState } from "../../zucstand/store";
-import { deleteUserApi } from "../../apis/profile";
-import Cookies from "js-cookie";
 import { GetAPICall } from "../../apis/apis";
 import { urls } from "../../config/urls";
+import { removeImageApi } from "../../apis/apis";
 
 export const useProfileHooks = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -44,13 +43,13 @@ export const useProfileHooks = () => {
         id: data.id,
       });
       infoStore.setProfileImage(data.profileImage);
-      // const images =
-      //   res.images !== null
-      //     ? res.uploadedImages.map((item) => {
-      //         return item.image;
-      //       })
-      //     : [];
-      // infoStore.setUploadedImages(images);
+      const images =
+        data.uploadedImages !== null
+          ? data.uploadedImages.map((item) => {
+              return item.image;
+            })
+          : [];
+      infoStore.setUploadedImages(images);
       setIsLoading(false);
     }
   };
@@ -66,10 +65,14 @@ export const useProfileHooks = () => {
 
   const removeImage = async () => {
     setIsLoading(true);
-    const token = Cookies.get("token");
     setOpenModal(false);
     imageStore.setSelectedImage(-1);
-    await deleteUserApi(infoStore.id, imageStore.selectedImage, token);
+    await removeImageApi({
+      url: urls.deleteImage,
+      id: infoStore.id,
+      idx: imageStore.selectedImage,
+    });
+    // await deleteUserApi(infoStore.id, imageStore.selectedImage, token);
     await makeRequest();
     setIsLoading(false);
   };

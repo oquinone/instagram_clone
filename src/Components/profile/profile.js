@@ -11,7 +11,7 @@ import "../../styling/profile.scss";
 import "../../styling/globals.scss";
 import { useProfileHooks } from "./profile.hooks";
 
-export const Profile = () => {
+const Profile = () => {
   const {
     isLoading,
     openModal,
@@ -58,3 +58,5 @@ export const Profile = () => {
     </div>
   );
 };
+
+export default Profile;

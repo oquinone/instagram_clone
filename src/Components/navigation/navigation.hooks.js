@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { change } from "../../helper/settings";
 import { useInfoStore, useImageUploadState } from "../../zucstand/store";
-import { uploadNewImageToProfileApi } from "../../apis/app";
-import Cookies from "js-cookie";
+// import { uploadNewImageToProfileApi } from "../../apis/app";
+// import Cookies from "js-cookie";
 import { PostAPICall } from "../../apis/apis";
 import { urls } from "../../config/urls";
 
-export const useNavigationHooks = ({ reloadProfile }) => {
-  //   const [isLoggedOut, setIsLoggedOut] = useState(false);
+export const useNavigationHooks = (reloadProfile) => {
   const [openModal, setupModal] = useState(false);
 
   const imageStore = useImageUploadState();
@@ -23,23 +22,16 @@ export const useNavigationHooks = ({ reloadProfile }) => {
     setupModal(true);
   };
 
-  //   const signOut = async () => {
-  //     localStorage.clear();
-  //     Cookies.remove("token");
-  //     setIsLoggedOut(true);
-  //   };
-
   const submit = async () => {
     // setIsLoading(true);
     const data = { id: infoStore.id, image: imageStore.uploadedImage };
-    // const token = Cookies.get("token");
     await PostAPICall({
-      options: { params: { ...data } },
-      url: urls.uploadImage,
+      options: { ...data },
+      url: urls.uploadImageB64,
     });
     // await uploadNewImageToProfileApi(data, token);
     closeModal();
-    // await reloadProfile();
+    await reloadProfile();
   };
 
   const closeModal = (e) => {

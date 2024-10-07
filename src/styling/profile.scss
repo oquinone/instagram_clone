@@ -1,231 +1,226 @@
-@import './mixins.scss';
+@import "./mixins.scss";
 // $background: #242526;
-$background:  rgb(255, 255, 255);
+$background: rgb(255, 255, 255);
 $text-color: #242526;
 
-.spinner{
-    width: 100%;
-    height: 100vh;
-    align-items: center;
-    background-color: $background;
-
+.spinner {
+  width: 100%;
+  height: 100vh;
+  align-items: center;
+  background-color: $background;
 }
 
-.profile{
+.profile {
+  background-color: $background;
+  height: 100vh;
+  overflow: scroll;
+  overflow-x: hidden;
+
+  &-header {
+    flex-flow: row nowrap;
+    width: 100%;
     background-color: $background;
-    height: 100vh;
-    overflow: scroll;
-    overflow-x: hidden;
+    align-items: center;
+    color: $text-color;
 
-    &-header{
-        flex-flow: row nowrap;
-        width: 100%;
-        background-color:$background;
-        align-items: center;
-        color: $text-color;
-        
-
-        .logout{
-            cursor: pointer;
-        }
-
-        .btn-link{
-            border: none;
-            cursor: pointer;
-            background-color: transparent;
-            outline: none;
-            color: white;
-        }
-
-        .btn-link:hover{
-            color: red;
-        }
+    .logout {
+      cursor: pointer;
     }
 
-    &-user{
+    .btn-link {
+      border: none;
+      cursor: pointer;
+      background-color: transparent;
+      outline: none;
+      color: white;
+    }
+
+    .btn-link:hover {
+      color: red;
+    }
+  }
+
+  &-user {
+    display: flex;
+    flex-flow: row nowrap;
+    @include breakpoint-down(small) {
+      justify-content: space-evenly;
+    }
+    @include breakpoint-up(medium) {
+      justify-content: space-evenly;
+      margin: 0 5em;
+    }
+    align-items: center;
+    background-color: $background;
+    color: $text-color;
+    // border: 1px solid red;
+  }
+
+  &-stats-mobile {
+    @include breakpoint-up(medium) {
+      display: none;
+    }
+    width: 80%;
+    padding-left: 1em;
+    ul {
+      flex-flow: row nowrap;
+      list-style-type: none;
+      margin: 0 auto;
+
+      li {
+        font-size: 13px;
+        // padding: 0px 10px;
+        text-align: center;
+      }
+    }
+  }
+
+  &-stats {
+    @include breakpoint-down(small) {
+      display: none;
+    }
+
+    .info {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: space-between;
+      align-items: center;
+      text-align: left;
+      h1 {
+        font-size: 2em;
+      }
+    }
+
+    .status {
+      display: flex;
+      flex-flow: row nowrap;
+      margin: 0.5em 0;
+
+      &-flex {
         display: flex;
         flex-flow: row nowrap;
-        @include breakpoint-down(small){
-            justify-content: space-evenly;
+        align-items: baseline;
+        padding: 0 2em 0 0;
+        h4 {
+          font-size: 18px;
+          font-weight: 700;
         }
-        @include breakpoint-up(medium){
-            justify-content: space-evenly;
-            margin: 0 5em;
+        h4,
+        h5 {
+          padding: 5px 2px;
+          font-family: "Convergence", sans-serif;
         }
-        align-items: center;
-        background-color: $background;
-        color: $text-color;
-        // border: 1px solid red;
+        h5 {
+          font-size: 15px;
+          font-weight: 300;
+        }
+      }
     }
+  }
 
-    &-stats-mobile{
-        @include breakpoint-up(medium){
-            display: none;
-        }
-        width: 80%;
-        padding-left: 1em;
-        ul{
-            flex-flow: row nowrap;
-            list-style-type: none;
-            margin: 0 auto;
-    
-    
-            li{
-                font-size: 13px;
-                // padding: 0px 10px;
-                text-align: center;
-            }
-        }
+  &-pic {
+    @include breakpoint-up(medium) {
+      // transition: width 1s, height 1s;
+      width: 9em;
+      height: 9em;
     }
+    width: 6em;
+    height: 6em;
+    border-radius: 50%;
+    object-fit: cover;
+  }
 
-    &-stats{
-        @include breakpoint-down(small){
-            display: none;
-        }
-        
-        .info{
-            display: flex;
-            flex-flow: row nowrap;
-            justify-content: space-between;
-            align-items: center;
-            text-align: left;
-            h1{
-                font-size: 2em;
-            }
-        }
+  &-edit {
+    padding: 10px 5px;
+    background-color: $background;
 
-        .status{
-            display: flex;
-            flex-flow: row nowrap;
-            margin: .5em 0;
-
-            &-flex{
-                display: flex;
-                flex-flow: row nowrap;
-                align-items: baseline;
-                padding: 0 2em 0 0;
-                h4{
-                    font-size: 18px;
-                    font-weight: 700;
-                }
-                h4, h5{
-                    padding: 5px 2px;
-                    font-family: 'Convergence', sans-serif;
-                }
-                h5{
-                    font-size: 15px;
-                    font-weight: 300;
-                }
-            }
-        
-        }
+    .btn-secondary {
+      outline: none;
     }
-
-    &-pic{
-        @include breakpoint-up(medium){
-            // transition: width 1s, height 1s;
-            width: 9em;
-            height: 9em;
-        }
-        width: 6em;
-        height: 6em;
-        border-radius: 50%;
-        object-fit: cover;
+    .btn-secondary:hover {
+      color: none;
     }
-
-    &-edit{
-        padding: 10px 5px;
-        background-color: $background;
-    
-        .btn-secondary{
-            outline: none;
-        }
-        .btn-secondary:hover{
-            color: none;
-        }
-        .btn-secondary:active{
-            color: none;
-        }
+    .btn-secondary:active {
+      color: none;
     }
+  }
 
-    &-bio{
-        &-mobile{
-            @include breakpoint-up(medium){
-                display: none;
-            }
-            margin: 0 1em;
-            text-align: left;
-            background-color: $background;
-            color: $text-color;
-        }
-        // background-color: $background;
-        // color: $text-color;
+  &-bio {
+    &-mobile {
+      @include breakpoint-up(medium) {
+        display: none;
+      }
+      margin: 0 1em;
+      text-align: left;
+      background-color: $background;
+      color: $text-color;
     }
-    
-    &-followers-mobile{
-        @include breakpoint-up(medium){
-            &{
-                display: none;
-            }
-            &-hr{
-                display: none;
-            }
-        }
-        display: flex;
-        flex-flow: row nowrap;
-        justify-content: space-evenly;
+    // background-color: $background;
+    // color: $text-color;
+  }
+
+  &-followers-mobile {
+    @include breakpoint-up(medium) {
+      & {
+        display: none;
+      }
+      &-hr {
+        display: none;
+      }
+    }
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-evenly;
+    margin: 0;
+
+    &-flex {
+      display: flex;
+      flex-flow: column nowrap;
+      text-align: center;
+      h5 {
+        font-size: 13px;
+        font-weight: 900;
         margin: 0;
-
-        &-flex{
-            display: flex;
-            flex-flow: column nowrap;
-            text-align: center;
-            h5{
-                font-size: 13px;
-                font-weight: 900;
-                margin: 0;
-            }
-
-        }
+      }
     }
+  }
 
-    &-uploads{
-        @include breakpoint-up(medium){
-            width: 75%;
-        }
-        width: 100%;
-        margin: auto;
-        &-flex{
-            display: flex;
-            flex-flow: row wrap;
-            align-items: center;
-            // justify-content: 
-            margin: auto;
-            
-            div{
-
-                @include breakpoint-up(large){
-                    margin: .9em;
-                }
-                margin: 1px;
-                img{
-                    @include breakpoint-down(small){
-                        width:32.5vw;
-                        height: 32vw;
-                    }
-                    width: 22vw;
-                    height: 22vw;
-                    object-fit: cover;
-                }
-            }
-        }
+  &-uploads {
+    @include breakpoint-up(medium) {
+      width: 75%;
     }
+    width: 100%;
+    margin: auto;
+    &-flex {
+      display: flex;
+      flex-flow: row wrap;
+      align-items: center;
+      // justify-content:
+      margin: auto;
 
-    &-nav{
-        // display: inline-block;
-        // position: relative;
-        // top: 0;
-        // width: 100%;
-        // border: 1px solid red;
+      div {
+        @include breakpoint-up(large) {
+          margin: 0.9em;
+        }
+        margin: 1px;
+        img {
+          @include breakpoint-down(small) {
+            width: 32.5vw;
+            height: 32vw;
+          }
+          width: 22vw;
+          height: 22vw;
+          object-fit: cover;
+        }
+      }
     }
+  }
+
+  &-nav {
+    // display: inline-block;
+    // position: relative;
+    // top: 0;
+    // width: 100%;
+    // border: 1px solid red;
+  }
 }
