@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/instagram_clone/static/css/main.534f1402.css",
-    "main.js": "/instagram_clone/static/js/main.7a62b057.js",
-    "static/media/nature_3.jpeg": "/instagram_clone/static/media/nature_3.cb6c8ed0000a473ffd49.jpeg",
-    "static/media/nature_2.jpeg": "/instagram_clone/static/media/nature_2.e6e4f8a4ba3ef464e822.jpeg",
-    "static/media/nature_1.jpeg": "/instagram_clone/static/media/nature_1.69aba6e3217ce267b64d.jpeg",
-    "static/media/nature_4.jpeg": "/instagram_clone/static/media/nature_4.8275fc4e0339602ca9a3.jpeg",
-    "static/media/ucscsammy.jpeg": "/instagram_clone/static/media/ucscsammy.9c0f0db57bb33cbb480f.jpeg",
-    "index.html": "/instagram_clone/index.html",
-    "static/media/cancel.svg": "/instagram_clone/static/media/cancel.599088c5daf2192f4cb48e916606dd30.svg",
-    "static/media/save.svg": "/instagram_clone/static/media/save.166dd8cc0ef1669a8cffd89c5ad9d1da.svg",
-    "main.534f1402.css.map": "/instagram_clone/static/css/main.534f1402.css.map",
-    "main.7a62b057.js.map": "/instagram_clone/static/js/main.7a62b057.js.map"
+    "main.css": "/image-upload/static/css/main.534f1402.css",
+    "main.js": "/image-upload/static/js/main.262bfe70.js",
+    "static/media/nature_3.jpeg": "/image-upload/static/media/nature_3.cb6c8ed0000a473ffd49.jpeg",
+    "static/media/nature_2.jpeg": "/image-upload/static/media/nature_2.e6e4f8a4ba3ef464e822.jpeg",
+    "static/media/nature_1.jpeg": "/image-upload/static/media/nature_1.69aba6e3217ce267b64d.jpeg",
+    "static/media/nature_4.jpeg": "/image-upload/static/media/nature_4.8275fc4e0339602ca9a3.jpeg",
+    "static/media/ucscsammy.jpeg": "/image-upload/static/media/ucscsammy.9c0f0db57bb33cbb480f.jpeg",
+    "index.html": "/image-upload/index.html",
+    "static/media/cancel.svg": "/image-upload/static/media/cancel.599088c5daf2192f4cb48e916606dd30.svg",
+    "static/media/save.svg": "/image-upload/static/media/save.166dd8cc0ef1669a8cffd89c5ad9d1da.svg",
+    "main.534f1402.css.map": "/image-upload/static/css/main.534f1402.css.map",
+    "main.262bfe70.js.map": "/image-upload/static/js/main.262bfe70.js.map"
   },
   "entrypoints": [
     "static/css/main.534f1402.css",
-    "static/js/main.7a62b057.js"
+    "static/js/main.262bfe70.js"
   ]
 }
