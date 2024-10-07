@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 import { useInfoStore } from "../zucstand/store";
 
-export const ProfileUserInfo = () => {
+const ProfileUserInfo = () => {
   const username = useInfoStore((state) => state.username);
   const bio = useInfoStore((state) => state.bio);
   const profilePicture = useInfoStore((state) => state.profileImage);
@@ -70,3 +70,5 @@ export const ProfileUserInfo = () => {
     </section>
   );
 };
+
+export default ProfileUserInfo;
