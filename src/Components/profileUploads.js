@@ -8,7 +8,7 @@ import img_4 from "../images/nature_4.jpeg";
 //zucstand
 import { useInfoStore, useImageUploadState } from "../zucstand/store";
 
-export const ProfileUploads = () => {
+const ProfileUploads = () => {
   const uploadedImages = useInfoStore((state) => state.uploadedImages);
   const imgs = [img_1, img_2, img_3, img_4];
   const { setSelectedImage } = useImageUploadState();
@@ -32,3 +32,5 @@ export const ProfileUploads = () => {
     </section>
   );
 };
+
+export default ProfileUploads;

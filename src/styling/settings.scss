@@ -1,49 +1,56 @@
 $background: #242526;
 $text-color: white;
-.settings{
+.settings {
+  background-color: $background;
+  color: $text-color;
+  height: 100vh;
+  font-family: "Jura", sans-serif;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-items: flex-end;
+  align-items: center;
+
+  &-nav {
+    width: 100%;
     background-color: $background;
-    color: $text-color;
-    height: 100vh;
-    font-family: 'Jura', sans-serif;
+    padding: 10px 25px 5px 25px;
+  }
 
-    &-nav{
-        background-color: $background;
-        padding: 10px 25px 5px 25px;
+  &-body {
+    flex-flow: column nowrap;
+    align-items: center;
+    padding-top: 10px;
+    text-align: center;
+    margin-top: 50px;
+    width: 50%;
+    // border: 1px solid red;
+
+    .profilePicture-input {
+      display: none;
     }
 
-    &-body{
-        flex-flow: column nowrap;
-        align-items: center;
-        padding-top: 10px;
-        text-align: center;
-        
-        .profilePicture-input{
-            display: none;
-        }
-
-        .pic{
-            width: 50%;
-            height: 150px;
-            object-fit: cover;
-            &:hover{
-                
-            }
-        }
-
-        .btn-container{
-            width: 80%;
-        }
-
-        .btn{
-            width: 40%;
-        }
-        .textarea{
-            width: 80%;
-        }
-
-        .hr{
-            border: 0.5px solid rgb(126, 126, 126);
-            // width: 90%;
-        }
+    .pic {
+      width: 50%;
+      height: 150px;
+      object-fit: cover;
+      &:hover {
+      }
     }
+
+    .btn-container {
+      width: 80%;
+    }
+
+    .btn {
+      width: 40%;
+    }
+    .textarea {
+      width: 80%;
+    }
+
+    .hr {
+      border: 0.5px solid rgb(126, 126, 126);
+      // width: 90%;
+    }
+  }
 }
