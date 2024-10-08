@@ -11,7 +11,7 @@ export const UploadFile = ({ open, close, save }) => {
   return (
     <Modal show={open} backdrop="static" keyboard={false}>
       <Modal.Header className="flex-c ">
-        <Modal.Title>Upload me?</Modal.Title>
+        <Modal.Title>Upload Image?</Modal.Title>
       </Modal.Header>
       <Modal.Body className="flex-c">
         <img
