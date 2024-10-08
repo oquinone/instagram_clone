@@ -3,7 +3,7 @@ import { Modal, Button } from "react-bootstrap";
 import "../styling/globals.scss";
 import "../styling/modal.scss";
 
-import { useImageUploadState } from "../zucstand/store";
+import { useImageUploadState } from "../store/store";
 
 export const UploadFile = ({ open, close, save }) => {
   const image = useImageUploadState((state) => state.image);

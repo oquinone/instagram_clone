@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { change } from "../../helper/settings";
-import { useInfoStore, useImageUploadState } from "../../zucstand/store";
-// import { uploadNewImageToProfileApi } from "../../apis/app";
-// import Cookies from "js-cookie";
+import { useInfoStore, useImageUploadState } from "../../store/store";
 import { PostAPICall } from "../../apis/apis";
 import { urls } from "../../config/urls";
 

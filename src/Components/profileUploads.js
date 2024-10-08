@@ -6,7 +6,7 @@ import img_3 from "../images/nature_3.jpeg";
 import img_4 from "../images/nature_4.jpeg";
 
 //zucstand
-import { useInfoStore, useImageUploadState } from "../zucstand/store";
+import { useInfoStore, useImageUploadState } from "../store/store";
 
 const ProfileUploads = () => {
   const uploadedImages = useInfoStore((state) => state.uploadedImages);

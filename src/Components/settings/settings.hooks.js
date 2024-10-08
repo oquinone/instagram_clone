@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useInfoStore } from "../../zucstand/store";
+import { useInfoStore } from "../../store/store";
 import { change } from "../../helper/settings";
 import { PutAPICall } from "../../apis/apis";
 import { urls } from "../../config/urls";

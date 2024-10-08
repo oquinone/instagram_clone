@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useInfoStore, useImageUploadState } from "../../zucstand/store";
+import { useInfoStore, useImageUploadState } from "../../store/store";
 import { GetAPICall } from "../../apis/apis";
 import { urls } from "../../config/urls";
 import { removeImageApi } from "../../apis/apis";

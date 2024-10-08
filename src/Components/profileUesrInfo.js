@@ -3,7 +3,7 @@ import Slug from "../images/ucscsammy.jpeg";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-import { useInfoStore } from "../zucstand/store";
+import { useInfoStore } from "../store/store";
 
 const ProfileUserInfo = () => {
   const username = useInfoStore((state) => state.username);
