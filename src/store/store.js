@@ -8,22 +8,22 @@ export const useInfoStore = create((set) => ({
   profileImage: "",
   uploadedImages: [],
 
-  setBio: (newBio) => set((state) => ({ bio: newBio })),
-  setUserName: (newUsername) => set((state) => ({ username: newUsername })),
+  setBio: (newBio) => set(() => ({ bio: newBio })),
+  setUserName: (newUsername) => set(() => ({ username: newUsername })),
   setInfo: ({ id, username, bio }) =>
-    set((state) => ({
+    set(() => ({
       id: id,
       username: username,
       bio: bio,
     })),
   setData: ({ username, bio }) =>
-    set((state) => ({
+    set(() => ({
       username: username,
       bio: bio,
     })),
-  setProfileImage: (newImage) => set((state) => ({ profileImage: newImage })),
-  setId: (newId) => set((state) => ({ id: newId })),
-  setUploadedImages: (images) => set((state) => ({ uploadedImages: images })),
+  setProfileImage: (newImage) => set(() => ({ profileImage: newImage })),
+  setId: (newId) => set(() => ({ id: newId })),
+  setUploadedImages: (images) => set(() => ({ uploadedImages: images })),
 }));
 
 // image upload store
@@ -35,15 +35,15 @@ export const useImageUploadStore = create((set) => ({
   profileImage: "",
   selectedImage: -1,
 
-  setImage: (newImage) => set((state) => ({ image: newImage })),
-  setImageName: (newImageName) => set((state) => ({ imageName: newImageName })),
+  setImage: (newImage) => set(() => ({ image: newImage })),
+  setImageName: (newImageName) => set(() => ({ imageName: newImageName })),
   setUploadedImage: (newUploadImage) =>
-    set((state) => ({ uploadedImage: newUploadImage })),
-  isUploaded: (isUploaded) => set((state) => ({ uploaded: isUploaded })),
+    set(() => ({ uploadedImage: newUploadImage })),
+  isUploaded: (isUploaded) => set(() => ({ uploaded: isUploaded })),
   setProfileImage: (newProfImage) =>
-    set((state) => ({ profileImage: newProfImage })),
+    set(() => ({ profileImage: newProfImage })),
   setSelectedImage: (newSelectedImage) =>
-    set((state) => ({ selectedImage: newSelectedImage })),
+    set(() => ({ selectedImage: newSelectedImage })),
 }));
 
 // sign up store

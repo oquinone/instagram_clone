@@ -48,16 +48,17 @@ export const useProfileHooks = () => {
   };
 
   const removeImage = async () => {
-    setIsLoading(true);
+    let images = infoStore.uploadedImages;
+    images.splice(imageStore.selectedImage, 1);
+    infoStore.setUploadedImages(images);
     setOpenModal(false);
-    imageStore.setSelectedImage(-1);
     await removeImageApi({
       url: urls.deleteImage,
       id: infoStore.id,
       idx: imageStore.selectedImage,
     });
+    imageStore.setSelectedImage(-1);
     await getProfileData();
-    setIsLoading(false);
   };
 
   const reloadProfile = async () => {
