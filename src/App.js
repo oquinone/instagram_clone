@@ -1,7 +1,7 @@
 import React from "react";
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
-import Profile from "./Components/profile/profile";
-import Settings from "./Components/settings/settings";
+import Profile from "./components/profile/profile";
+import Settings from "./components/settings/settings";
 
 const App = () => {
   return (
