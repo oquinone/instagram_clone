@@ -7,13 +7,13 @@ import { UploadFile } from "../modal";
 // import { uploadNewImageToProfileApi } from "../../apis/app";
 import { useNavigationHooks } from "./navigation.hooks";
 
-export const Navigation = ({ reloadProfile }) => {
-  const { openModal, submit, onFileChange, closeModal } =
-    useNavigationHooks(reloadProfile);
+export const Navigation = ({ reloadProfile, setIsLoading }) => {
+  const { openModal, uploadImage, onFileChange, closeModal } =
+    useNavigationHooks(reloadProfile, setIsLoading);
 
   return (
     <nav className="flex-c navigation">
-      <UploadFile open={openModal} close={closeModal} save={submit} />
+      <UploadFile open={openModal} close={closeModal} save={uploadImage} />
       <div
         style={{
           width: "70px",

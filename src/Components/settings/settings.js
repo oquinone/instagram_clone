@@ -13,7 +13,7 @@ const Settings = () => {
     changeProfileImage,
     updateSettings,
     isLoading,
-    done,
+    redirectToProfile,
     profileImage,
     username,
     setUsername,
@@ -29,7 +29,7 @@ const Settings = () => {
     );
   }
 
-  if (done) {
+  if (redirectToProfile) {
     return <Redirect to="/" />;
   }
 

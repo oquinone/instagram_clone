@@ -20,6 +20,7 @@ const Profile = () => {
     reloadProfile,
     infoStore,
     imageStore,
+    setIsLoading,
   } = useProfileHooks();
 
   if (isLoading) {
@@ -40,7 +41,7 @@ const Profile = () => {
       />
 
       <section className="profile-nav">
-        <Navigation reloadProfile={reloadProfile} />
+        <Navigation reloadProfile={reloadProfile} setIsLoading={setIsLoading} />
       </section>
       <hr />
 
