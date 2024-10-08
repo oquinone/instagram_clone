@@ -43,6 +43,7 @@ $text-color: #242526;
   &-user {
     display: flex;
     flex-flow: row nowrap;
+
     @include breakpoint-down(small) {
       justify-content: space-evenly;
     }

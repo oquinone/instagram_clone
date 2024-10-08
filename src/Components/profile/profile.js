@@ -36,10 +36,7 @@ const Profile = () => {
         image={infoStore.uploadedImages[imageStore.selectedImage]}
       />
 
-      <section className="profile-nav">
-        <Navigation />
-      </section>
-      <hr />
+      <Navigation />
 
       <ProfileUserInfo />
 
