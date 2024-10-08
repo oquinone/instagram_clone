@@ -1,12 +1,10 @@
-// import React, { useState, useEffect } from "react";
-// import { Redirect } from "react-router-dom";
 import { Spinner } from "react-bootstrap";
 import { Navigation } from "../navigation/navigation";
 import ProfileUserInfo from "../profileUesrInfo";
 import ProfileBioMobile from "../profileBioMobile";
 import ProfileUploads from "../profileUploads";
 import ProfileFollowersMobile from "../profileFollowersMobile";
-import { ImageModal } from "../imageDisplay";
+import { ImageModal } from "../imageModal";
 import "../../styling/profile.scss";
 import "../../styling/globals.scss";
 import { useProfileHooks } from "./profile.hooks";
@@ -15,12 +13,10 @@ const Profile = () => {
   const {
     isLoading,
     openModal,
-    closeModal,
+    closeImageUploadModal,
     removeImage,
-    reloadProfile,
     infoStore,
     imageStore,
-    setIsLoading,
   } = useProfileHooks();
 
   if (isLoading) {
@@ -35,23 +31,19 @@ const Profile = () => {
     <div className="profile">
       <ImageModal
         open={openModal}
-        close={closeModal}
+        close={closeImageUploadModal}
         remove={removeImage}
         image={infoStore.uploadedImages[imageStore.selectedImage]}
       />
 
       <section className="profile-nav">
-        <Navigation reloadProfile={reloadProfile} setIsLoading={setIsLoading} />
+        <Navigation />
       </section>
       <hr />
 
-      <ProfileUserInfo
-        username={infoStore.username}
-        bio={infoStore.bio}
-        profilePicture={infoStore.profileImage}
-      />
+      <ProfileUserInfo />
 
-      <ProfileBioMobile bio={infoStore.bio} />
+      <ProfileBioMobile />
 
       <ProfileFollowersMobile />
 

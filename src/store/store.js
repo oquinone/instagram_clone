@@ -27,7 +27,7 @@ export const useInfoStore = create((set) => ({
 }));
 
 // image upload store
-export const useImageUploadState = create((set) => ({
+export const useImageUploadStore = create((set) => ({
   image: "",
   imageName: "",
   uploadedImage: null,

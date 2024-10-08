@@ -2,26 +2,27 @@ import React from "react";
 import Slug from "../images/ucscsammy.jpeg";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-
-import { useInfoStore } from "../zucstand/store";
+import { useInfoStore } from "../store/store";
 
 const ProfileUserInfo = () => {
-  const username = useInfoStore((state) => state.username);
-  const bio = useInfoStore((state) => state.bio);
-  const profilePicture = useInfoStore((state) => state.profileImage);
+  const infoStore = useInfoStore();
 
   return (
     <section className="profile-p-all profile-user">
       <div>
-        {!profilePicture ? (
+        {!infoStore.profileImage ? (
           <img src={Slug} alt="Sammy The Slug" className="profile-pic" />
         ) : (
-          <img src={profilePicture} alt="Profile Pic" className="profile-pic" />
+          <img
+            src={infoStore.profileImage}
+            alt="Profile Pic"
+            className="profile-pic"
+          />
         )}
       </div>
       <div className="profile-stats-mobile">
         <div>
-          <h1>{username}</h1>
+          <h1>{infoStore.username}</h1>
         </div>
         <div className="p-tb profile-edit">
           <Link to="/edit">
@@ -34,7 +35,7 @@ const ProfileUserInfo = () => {
       <div className="profile-stats">
         <div className="info">
           <div className="info-username">
-            <h1>{username}</h1>
+            <h1>{infoStore.username}</h1>
           </div>
           <div className="p-tb profile-edit">
             <Link to="edit">
@@ -48,7 +49,7 @@ const ProfileUserInfo = () => {
         </div>
         <div className="status">
           <div className="status-flex">
-            <h4>8</h4>
+            <h4>{infoStore.uploadedImages.length}</h4>
             <h5>Post</h5>
           </div>
           <div className="status-flex">
@@ -61,7 +62,7 @@ const ProfileUserInfo = () => {
           </div>
         </div>
         <div className="profile-bio">
-          <p>{bio}</p>
+          <p>{infoStore.bio}</p>
         </div>
       </div>
 
