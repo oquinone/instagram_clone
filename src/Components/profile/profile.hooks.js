@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useInfoStore, useImageUploadState } from "../../store/store";
+import { useInfoStore, useImageUploadStore } from "../../store/store";
 import { GetAPICall } from "../../apis/apis";
 import { urls } from "../../config/urls";
 import { removeImageApi } from "../../apis/apis";
@@ -8,10 +8,10 @@ export const useProfileHooks = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [openModal, setOpenModal] = useState(false);
   const infoStore = useInfoStore();
-  const imageStore = useImageUploadState();
+  const imageStore = useImageUploadStore();
 
   useEffect(() => {
-    makeRequest();
+    getProfileData();
     // eslint-disable-next-line
   }, []);
 
@@ -21,7 +21,7 @@ export const useProfileHooks = () => {
     }
   }, [imageStore.selectedImage]);
 
-  const makeRequest = async () => {
+  const getProfileData = async () => {
     const res = await GetAPICall({ url: urls.profileData });
     if (res.length > 0) {
       const data = res[0];
@@ -42,7 +42,7 @@ export const useProfileHooks = () => {
     }
   };
 
-  const closeModal = () => {
+  const closeImageUploadModal = () => {
     imageStore.setSelectedImage(-1);
     setOpenModal(false);
   };
@@ -56,14 +56,13 @@ export const useProfileHooks = () => {
       id: infoStore.id,
       idx: imageStore.selectedImage,
     });
-    // await deleteUserApi(infoStore.id, imageStore.selectedImage, token);
-    await makeRequest();
+    await getProfileData();
     setIsLoading(false);
   };
 
   const reloadProfile = async () => {
     setIsLoading(true);
-    await makeRequest();
+    await getProfileData();
   };
 
   return {
@@ -71,7 +70,7 @@ export const useProfileHooks = () => {
     setIsLoading,
     openModal,
     setOpenModal,
-    closeModal,
+    closeImageUploadModal,
     removeImage,
     reloadProfile,
     infoStore,

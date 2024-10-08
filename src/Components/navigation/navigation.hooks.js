@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { change } from "../../helper/settings";
-import { useInfoStore, useImageUploadState } from "../../store/store";
+import { useInfoStore, useImageUploadStore } from "../../store/store";
 import { PostAPICall } from "../../apis/apis";
 import { urls } from "../../config/urls";
 
-export const useNavigationHooks = (reloadProfile, setIsLoading) => {
+export const useNavigationHooks = () => {
   const [openModal, setupModal] = useState(false);
-  const imageStore = useImageUploadState();
+  const imageStore = useImageUploadStore();
   const infoStore = useInfoStore();
 
   const onFileChange = async (e) => {
@@ -20,14 +20,16 @@ export const useNavigationHooks = (reloadProfile, setIsLoading) => {
   };
 
   const uploadImage = async () => {
-    setIsLoading(true);
+    infoStore.setUploadedImages([
+      ...infoStore.uploadedImages,
+      imageStore.uploadedImage,
+    ]);
+    closeModal();
     const data = { id: infoStore.id, image: imageStore.uploadedImage };
     await PostAPICall({
       options: { ...data },
       url: urls.uploadImageB64,
     });
-    closeModal();
-    await reloadProfile();
   };
 
   const closeModal = (e) => {

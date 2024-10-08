@@ -1,15 +1,11 @@
-// import { Link } from "react-router-dom";
 import "../../styling/navigation.scss";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
-// import { ReactComponent as Profile } from "../../svg/profile.svg";
-// import { ReactComponent as Off } from "../../svg/power-outline.svg";
-import { UploadFile } from "../modal";
-// import { uploadNewImageToProfileApi } from "../../apis/app";
+import { UploadFile } from "../uploadImageModal";
 import { useNavigationHooks } from "./navigation.hooks";
 
-export const Navigation = ({ reloadProfile, setIsLoading }) => {
+export const Navigation = () => {
   const { openModal, uploadImage, onFileChange, closeModal } =
-    useNavigationHooks(reloadProfile, setIsLoading);
+    useNavigationHooks();
 
   return (
     <nav className="flex-c navigation">
@@ -37,29 +33,6 @@ export const Navigation = ({ reloadProfile, setIsLoading }) => {
           />
         </div>
       </div>
-
-      {/* <div
-        style={{
-          width: "70px",
-          height: "40px",
-          padding: "15px 0 0 0",
-        }}
-      >
-        <Link to="/profile" className="nav-btn">
-          <Profile fill="black" />
-        </Link>
-      </div> */}
-
-      {/* <div
-        style={{
-          width: "70px",
-          height: "40px",
-          padding: "15px 0 0 0",
-          cursor: "pointer",
-        }}
-      >
-        <Off fill="black" onClick={() => signOut()} className="nav-btn" />
-      </div> */}
     </nav>
   );
 };
