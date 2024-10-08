@@ -6,9 +6,7 @@ import { removeImageApi } from "../../apis/apis";
 
 export const useProfileHooks = () => {
   const [isLoading, setIsLoading] = useState(true);
-  //   const [isLoggedOut, setIsLoggedOut] = useState(false);
   const [openModal, setOpenModal] = useState(false);
-  //   const [isToken, setIsToken] = useState(true);
   const infoStore = useInfoStore();
   const imageStore = useImageUploadState();
 
@@ -20,20 +18,10 @@ export const useProfileHooks = () => {
   useEffect(() => {
     if (imageStore.selectedImage !== -1 && imageStore.selectedImage !== -1) {
       setOpenModal(true);
-      // console.log(pData['uploadedPhotos'][imageStore.selectedImage.payload]);
     }
   }, [imageStore.selectedImage]);
 
   const makeRequest = async () => {
-    // const token = Cookies.get("token");
-    // if (!token) {
-    //   //   setIsToken(false);
-    //   setIsLoading(false);
-    //   return;
-    // }
-    // const storage = JSON.parse(localStorage.getItem("data"));
-    // const getEmail = storage.email || "";
-    // const res = await getProfileDataFromUser({ email: getEmail, token });
     const res = await GetAPICall({ url: urls.profileData });
     if (res.length > 0) {
       const data = res[0];
@@ -53,10 +41,6 @@ export const useProfileHooks = () => {
       setIsLoading(false);
     }
   };
-
-  // if (!isToken) {
-  //   return <Redirect to="/" />;
-  // }
 
   const closeModal = () => {
     imageStore.setSelectedImage(-1);

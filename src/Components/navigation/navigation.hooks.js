@@ -6,9 +6,8 @@ import { useInfoStore, useImageUploadState } from "../../zucstand/store";
 import { PostAPICall } from "../../apis/apis";
 import { urls } from "../../config/urls";
 
-export const useNavigationHooks = (reloadProfile) => {
+export const useNavigationHooks = (reloadProfile, setIsLoading) => {
   const [openModal, setupModal] = useState(false);
-
   const imageStore = useImageUploadState();
   const infoStore = useInfoStore();
 
@@ -22,14 +21,13 @@ export const useNavigationHooks = (reloadProfile) => {
     setupModal(true);
   };
 
-  const submit = async () => {
-    // setIsLoading(true);
+  const uploadImage = async () => {
+    setIsLoading(true);
     const data = { id: infoStore.id, image: imageStore.uploadedImage };
     await PostAPICall({
       options: { ...data },
       url: urls.uploadImageB64,
     });
-    // await uploadNewImageToProfileApi(data, token);
     closeModal();
     await reloadProfile();
   };
@@ -39,5 +37,5 @@ export const useNavigationHooks = (reloadProfile) => {
     setupModal(false);
   };
 
-  return { openModal, setupModal, submit, onFileChange, closeModal };
+  return { openModal, setupModal, uploadImage, onFileChange, closeModal };
 };
