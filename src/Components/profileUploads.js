@@ -15,14 +15,16 @@ const ProfileUploads = () => {
       <hr />
       <div className="profile-uploads-flex">
         {infoStore.uploadedImages !== undefined
-          ? infoStore.uploadedImages.map((data, index) => (
-              <div
-                key={index}
-                onClick={() => imageStore.setSelectedImage(index)}
-              >
-                <img src={data} alt={data} />
-              </div>
-            ))
+          ? infoStore.uploadedImages.map((data, index) => {
+              return (
+                <div
+                  key={index}
+                  onClick={() => imageStore.setSelectedImage(index)}
+                >
+                  <img src={data} alt={data} />
+                </div>
+              );
+            })
           : imgs.map((data, index) => (
               <div
                 key={index}
